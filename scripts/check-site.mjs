@@ -1,0 +1,8 @@
+import fs from 'node:fs';import path from 'node:path';import {spawnSync} from 'node:child_process';
+const root=process.cwd();const required=['index.html','resume.html','assets/site.css','assets/site.js','assets/mark.svg','assets/hero-portrait.webp','assets/about-profile.webp','assets/portrait-social.svg'];
+for(const f of required){if(!fs.existsSync(path.join(root,f)))throw Error('Missing site asset '+f)}
+const js=spawnSync(process.execPath,['--check','assets/site.js'],{encoding:'utf8'});if(js.status!==0)throw Error('JS syntax error: '+js.stderr);
+for(const f of ['index.html','resume.html']){const src=fs.readFileSync(f,'utf8');for(const m of src.matchAll(/(?:href|src)=["']([^"']+)["']/g)){let u=m[1];if(!u||u.startsWith('#')){if(u.startsWith('#')&&!src.includes('id="'+u.slice(1)+'"'))throw Error('Broken anchor '+u+' in '+f);continue}if(/^(https?:|mailto:|tel:|data:)/.test(u))continue;const file=u.split(/[?#]/)[0];const target=path.join(root,file.startsWith('/')?file.slice(1):path.dirname(f),...(file.startsWith('/')?[]:[file]));if(!fs.existsSync(target))throw Error('Broken link '+u+' in '+f)}}}
+const main=fs.readFileSync('index.html','utf8');for(const name of ['mernorahflow','securegate','roxzy','farmart','retailcore','netpulse','hopehills','innovartus','webdelivery']){if(!main.includes('data-project="'+name+'"'))throw Error('Project missing '+name)}
+if(!main.includes('https://formsubmit.co/ajax/'))throw Error('Contact service missing');
+console.log('Portfolio structural checks passed');
