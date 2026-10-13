@@ -1,0 +1,33 @@
+name: Import high-resolution portfolio portraits
+on:
+  push:
+    paths:
+      - .github/workflows/import-portraits.yml
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  import-portraits:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install image tooling
+        run: python -m pip install pillow
+      - name: Optimize source photographs
+        run: python scripts/import-portraits.py
+      - name: Commit optimized photographs to repository
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/hero-portrait.webp assets/about-profile.webp
+          if ! git diff --cached --quiet; then
+            git commit -m "Upgrade portfolio portraits from user-provided high-resolution originals"
+            git push origin HEAD:main
+          else
+            echo "Portraits already current"
+          fi
