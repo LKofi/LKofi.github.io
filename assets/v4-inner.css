@@ -174,3 +174,16 @@ body.inner-page main{overflow:clip}
 .v4-footer-links{gap:14px}
 }
 @media(prefers-reduced-motion:reduce){.v4-project{transition:none}.v4-action span{transition:none}}
+
+
+/* Editorial opening motion: restrained, text-led and accessible */
+@keyframes v4-hero-reveal{
+ from{opacity:0;transform:translate3d(0,34px,0);filter:blur(4px)}
+ to{opacity:1;transform:translate3d(0,0,0);filter:blur(0)}
+}
+@media(prefers-reduced-motion:no-preference){
+ .inner-hero .v4-kicker{animation:v4-hero-reveal .8s cubic-bezier(.2,.85,.25,1) .04s both}
+ .inner-hero h1{animation:v4-hero-reveal 1s cubic-bezier(.2,.85,.25,1) .13s both}
+ .inner-hero .v4-intro{animation:v4-hero-reveal 1s cubic-bezier(.2,.85,.25,1) .28s both}
+ .inner-hero .v4-topline{animation:v4-hero-reveal .8s cubic-bezier(.2,.85,.25,1) .45s both}
+}
