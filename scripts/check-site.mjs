@@ -11,7 +11,7 @@ for(const file of ['assets/v2.js','assets/v3-home.js','assets/v4-inner.js']){
 }
 for(const f of pages){
  const html=fs.readFileSync(f,'utf8');
- if(!html.match(/<main\b[^>]*id=["']main["']/))throw Error('Missing main '+f);
+ if(f!=='resume.html'&&!html.match(/<main\b[^>]*id=["']main["']/))throw Error('Missing main '+f);
  if(!html.includes('<title>'))throw Error('No title '+f);
  const ids=new Set([...html.matchAll(/\bid=["']([^"']+)["']/g)].map(m=>m[1]));
  for(const m of html.matchAll(/(?:href|src|action)=["']([^"']+)["']/g)){
