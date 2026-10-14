@@ -3,9 +3,9 @@ import fs from 'node:fs';
 import path from 'node:path';
 import {spawnSync} from 'node:child_process';
 const pages=['index.html','projects.html','about.html','experience.html','contact.html','resume.html'];
-const assets=['assets/v2.css','assets/v2.js','assets/v3-home.css','assets/v3-home.js','assets/v4-inner.css','assets/v4-inner.js','assets/v3-hero.webp','assets/v3-flow-demo.webp','assets/v5.css','assets/v5.js','assets/hero-portrait.webp','assets/Sukkah_Emmanuel_CV_2026.pdf','assets/mark.svg'];
+const assets=['assets/v2.css','assets/v2.js','assets/v3-home.css','assets/v3-home.js','assets/v4-inner.css','assets/v4-inner.js','assets/v3-hero.webp','assets/v3-flow-demo.webp','assets/v5.css','assets/v5.js','assets/v5-immersive.css','assets/v5-immersive.js','assets/hero-portrait.webp','assets/Sukkah_Emmanuel_CV_2026.pdf','assets/mark.svg'];
 for(const f of [...pages,...assets])if(!fs.existsSync(f))throw Error('Missing '+f);
-for(const file of ['assets/v2.js','assets/v3-home.js','assets/v4-inner.js','assets/v5.js']){
+for(const file of ['assets/v2.js','assets/v3-home.js','assets/v4-inner.js','assets/v5.js','assets/v5-immersive.js']){
  const r=spawnSync(process.execPath,['--check',file],{encoding:'utf8'});
  if(r.status!==0)throw Error('JavaScript syntax: '+file+'\n'+r.stderr);
 }
@@ -60,4 +60,16 @@ const cvSha=createHash('sha1').update(Buffer.from('blob '+cv.length+'\0')).updat
 if(cvSha!=='bee9ac49c2821b797e6beae151a8f925e066924c')throw Error('Approved 2026 CV changed; re-verify before release');
 const homeText=fs.readFileSync('index.html','utf8');
 for(const item of ['id="hero-title"','href="/projects.html#mernorahflow"','href="/projects.html#securegate"','href="/projects.html#roxzy"','href="/assets/Sukkah_Emmanuel_CV_2026.pdf"'])if(!homeText.includes(item))throw Error('Recruiter conversion link missing '+item);
+
+const immersiveHome=fs.readFileSync('index.html','utf8');
+for (const item of ['SEAK<span>.</span>','class="hero seak-hero"','id="seak-core-toggle"','id="seak-particles"','/assets/v5-immersive.css','/assets/v5-immersive.js','/assets/v3-hero.webp']) {
+ if(!immersiveHome.includes(item))throw Error('V5 immersive requirement missing '+item);
+}
+for(const file of ['projects.html','about.html','experience.html','contact.html']) {
+ const page=fs.readFileSync(file,'utf8');
+ if(!page.includes('SEAK<span>.</span>')||!page.includes('/assets/v5-immersive.css'))throw Error('SEAK branding incomplete '+file);
+}
+const immersiveJS=fs.readFileSync('assets/v5-immersive.js','utf8');
+for(const t of ['requestAnimationFrame','prefers-reduced-motion','aria-pressed','visibilitychange','IntersectionObserver'])
+ if(!immersiveJS.includes(t))throw Error('Immersive interactivity or accessibility regression: '+t);
 console.log('PASS — six pages, navigation references, nine case studies, five JS bundles, fonts, CV and contact fallback.');
