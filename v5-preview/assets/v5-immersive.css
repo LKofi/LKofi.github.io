@@ -176,3 +176,46 @@ body.v5-home{background:var(--seak-black);color:var(--seak-white)}
  .v5-home .hero.seak-hero .seak-hero-layout{width:calc(100% - 38px)}
 }
 @media(max-width:390px){.v5-home .hero.seak-hero .seak-headline{font-size:36px}}
+
+/* The actual WebGL renderer is a transparent layer above the atmospheric fallback,
+   but does not cover or intercept the accessible HTML content. */
+.v5-home .seak-world-3d{
+  position:absolute;inset:0;display:block;width:100%;height:100%;
+  pointer-events:none;z-index:4;opacity:.96;mix-blend-mode:screen;
+  filter:saturate(.94) contrast(1.05);
+}
+.v5-home .seak-world-3d[hidden]{display:none!important}
+.v5-home.seak-webgl-ready .seak-core-ring,
+.v5-home.seak-webgl-ready .seak-core-sphere{
+  opacity:0!important;visibility:hidden!important;animation:none!important
+}
+.v5-home.seak-webgl-ready .seak-core-button{
+  filter:none;cursor:pointer;border:1px solid transparent;border-radius:50%
+}
+.v5-home.seak-webgl-ready .seak-core-button:focus-visible{
+  border-color:#f4f0f1;box-shadow:0 0 0 5px #c714404e
+}
+.v5-home.seak-webgl-ready .seak-particles{opacity:.16}
+.v5-home.seak-webgl-ready .seak-portrait{
+  opacity:.78;mix-blend-mode:screen;
+  filter:contrast(1.1) saturate(.85) brightness(.93) drop-shadow(0 0 60px #830d2538)
+}
+.v5-home.seak-webgl-ready .seak-portrait-environment{
+  transform:translate3d(calc(var(--seak-mx,0)*-7px),calc(var(--seak-my,0)*-4px),0)
+}
+.v5-home .seak-world-3d~.seak-hero-layout .seak-hero-main{position:relative;z-index:6}
+.v5-home .seak-immersive-stage{position:relative;z-index:3}
+.v5-home .seak-world-3d~.seak-hero-layout .seak-core-wrap{z-index:5}
+@media(max-width:980px){
+ .v5-home .seak-world-3d{opacity:.83}
+ .v5-home.seak-webgl-ready .seak-portrait{opacity:.8}
+}
+@media(max-width:650px){
+ .v5-home .seak-world-3d{opacity:.7}
+ .v5-home.seak-webgl-ready .seak-portrait{opacity:.9;filter:contrast(1.06) saturate(.85) brightness(.96)}
+}
+@media(prefers-reduced-motion:reduce){
+ .v5-home .seak-world-3d{display:none!important}
+ .v5-home.seak-webgl-ready .seak-core-ring,
+ .v5-home.seak-webgl-ready .seak-core-sphere{visibility:visible!important;opacity:1!important}
+}

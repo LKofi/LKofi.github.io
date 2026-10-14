@@ -17,6 +17,7 @@
       toggle.setAttribute("aria-pressed",String(intelligence));
       toggle.setAttribute("aria-label",intelligence?"Return to architectural mode":"Activate interactive intelligence mode");
       status.textContent=intelligence?"INTELLIGENCE MODE ACTIVE":"ARCHITECTURE ONLINE";
+      window.dispatchEvent(new CustomEvent("seak:mode",{detail:{mode:intelligence?"intelligence":"architecture"}}));
     });
   }
   // Environmental perspective: reacts to a user's mouse movement, not a fake click decoration.
