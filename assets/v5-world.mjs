@@ -78,7 +78,7 @@ const THREE_URL="https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.j
   }
 
   // Living Engine: nested physical rings and a sculpted metallic sphere.
-  pivot=new THREE.Group();pivot.position.set(3.4,.55,-.5);scene.add(pivot);
+  pivot=new THREE.Group();pivot.position.set(5.7,-1.85,-1.4);scene.add(pivot);
   const outerMat=new THREE.MeshPhysicalMaterial({color:0xd0cbd2,metalness:.94,roughness:.13,clearcoat:.9,emissive:0x64041d,emissiveIntensity:.24});
   const ringGeom=(r,t)=>new THREE.TorusGeometry(r,t,18,126);
   outer=new THREE.Mesh(ringGeom(2.0,.075),outerMat);outer.rotation.set(.38,.25,.17);pivot.add(outer);
@@ -114,11 +114,11 @@ const THREE_URL="https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.j
   glow.scale.set(7,7,1);glow.position.set(0,0,-2);pivot.add(glow);
 
   // A few lines of light connect space to the core; no resource-heavy postprocessing.
-  const pathMaterial=new THREE.LineBasicMaterial({color:0x9f2848,transparent:true,opacity:.35});
+  const pathMaterial=new THREE.LineBasicMaterial({color:0x8c304b,transparent:true,opacity:.12});
   for(let i=0;i<5;i++){
    const origin=new THREE.Vector3(-9+(i*4),-3.35,-7);
-   const endpoint=new THREE.Vector3(3.4,Math.sin(i*1.7)*.6+.3,-.5);
-   const a=new THREE.QuadraticBezierCurve3(origin,new THREE.Vector3((origin.x+3.4)/2,3.8-i*.8,-5),endpoint);
+   const endpoint=new THREE.Vector3(5.7,Math.sin(i*1.7)*.4-1.75,-1.4);
+   const a=new THREE.QuadraticBezierCurve3(origin,new THREE.Vector3((origin.x+5.7)/2,2.1-i*.8,-5),endpoint);
    const geo=new THREE.BufferGeometry().setFromPoints(a.getPoints(38));
    const line=new THREE.Line(geo,pathMaterial);scene.add(line);lines.push(line);
   }
@@ -129,7 +129,7 @@ const THREE_URL="https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.j
    dustPositions[i*3+2]=Math.random()*18-15;
   }
   const dustGeo=new THREE.BufferGeometry();dustGeo.setAttribute("position",new THREE.BufferAttribute(dustPositions,3));
-  points=new THREE.Points(dustGeo,new THREE.PointsMaterial({color:0xef5b7b,size:.028,transparent:true,opacity:.45,sizeAttenuation:true,depthWrite:false}));
+  points=new THREE.Points(dustGeo,new THREE.PointsMaterial({color:0xc07b8d,size:.023,transparent:true,opacity:.22,sizeAttenuation:true,depthWrite:false}));
   scene.add(points);
  }catch(err){
   console.warn("SEAK 3D scene creation failed; retaining CSS fallback.",err);
@@ -147,9 +147,9 @@ const THREE_URL="https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.j
   camera.aspect=w/h;
   camera.fov=window.innerWidth<650?56:window.innerWidth<1000?48:43;
   camera.updateProjectionMatrix();
-  pivot.position.x=window.innerWidth<650?1.72:window.innerWidth<980?2.4:3.4;
-  pivot.position.y=window.innerWidth<650?-.65:window.innerWidth<980?-.1:.55;
-  const scale=window.innerWidth<650?.66:window.innerWidth<980?.86:1;
+  pivot.position.x=window.innerWidth<650?2.75:window.innerWidth<980?4.1:5.7;
+  pivot.position.y=window.innerWidth<650?-2.55:window.innerWidth<980?-2.15:-1.85;
+  const scale=window.innerWidth<650?.38:window.innerWidth<980?.49:.57;
   pivot.scale.setScalar(scale);
  }
  function render(time){
@@ -168,7 +168,7 @@ const THREE_URL="https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.j
   inner.rotation.y+=dt*.28*power;
   core.rotation.y+=dt*.16*power;
   core.rotation.x+=dt*.09*power;
-  pivot.position.y+=(Math.sin(elapsed*.9)*.11+(window.innerWidth<650?-.65:window.innerWidth<980?-.1:.55)-pivot.position.y)*.1;
+  pivot.position.y+=(Math.sin(elapsed*.9)*.07+(window.innerWidth<650?-2.55:window.innerWidth<980?-2.15:-1.85)-pivot.position.y)*.1;
   const targetX=mouseX*.14;
   const targetY=mouseY*.12;
   camera.position.x+=(targetX-camera.position.x)*.035;
