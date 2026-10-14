@@ -1,0 +1,178 @@
+/* SEAK — immersive identity system, V5 revision.
+   Three-dimensional depth through composited CSS, a particle canvas, and genuine user interaction.
+   The approved photographic image is never regenerated. */
+:root{--seak-black:#030305;--seak-crimson:#9d0b26;--seak-red:#cb1434;--seak-white:#fcfbfc}
+body.v5-home{background:var(--seak-black);color:var(--seak-white)}
+.v5-home .site-header{position:absolute;top:0;left:0;right:0;z-index:100;background:linear-gradient(180deg,#030305d9,#0303052e);border-bottom:1px solid #ffffff19;backdrop-filter:blur(10px)}
+.v5-home .brand{font-size:29px;letter-spacing:-.092em;font-family:'Manrope',sans-serif;white-space:nowrap;margin-right:0}
+.v5-home .brand span{letter-spacing:-.1em;color:#d41438}
+.v5-home .brand small{font-size:8px;letter-spacing:.16em}
+.v5-home .desktop-nav a.active:after{background:#e3133b}
+.v5-home .nav-cta{border-color:#d31f44}
+.v5-home .hero.seak-hero{position:relative;min-height:100svh;min-height:max(830px,100svh);background:#030305!important;isolation:isolate;overflow:hidden;display:flex;flex-direction:column;justify-content:center;padding-top:95px}
+.v5-home .seak-world{position:absolute;inset:0;z-index:0;pointer-events:none;perspective:1200px;overflow:hidden;background:radial-gradient(ellipse at 67% 52%,#26050e 0%,#090308 36%,#020203 85%)}
+.v5-home .seak-architectural-shell{position:absolute;inset:-15%;transform:perspective(1200px) rotateY(calc(var(--seak-mx,0)*-1.3deg)) rotateX(calc(var(--seak-my,0)*.8deg));transition:transform .45s ease-out}
+.v5-home .seak-wall{position:absolute;height:145%;top:-19%;width:21%;border-left:1px solid #5d2135;border-right:1px solid #291320;background:linear-gradient(93deg,#060608 0%,#140b0e 11%,#050307 15%,#100b0e 37%,#32121b 39%,#070307 41%,#060407 94%);box-shadow:0 0 95px #000, inset 0 0 1px #e45c704f}
+.v5-home .wall-a{left:46%;transform:skewY(-10deg) skewX(-14deg)}
+.v5-home .wall-b{right:-5%;transform:skewY(7deg) skewX(-9deg);filter:brightness(.77)}
+.v5-home .seak-light-shaft{position:absolute;width:2px;height:180%;left:69%;top:-40%;transform:rotate(17deg);background:linear-gradient(180deg,transparent,#f19ca8, #d4123b,transparent);box-shadow:0 0 24px 4px #c00e36aa,0 0 150px 22px #970c2a55;opacity:.53;animation:seak-light-breathe 6s ease-in-out infinite alternate}
+.v5-home .seak-depth-floor{position:absolute;left:0;right:0;bottom:-36%;height:56%;transform:perspective(570px) rotateX(67deg);background:repeating-linear-gradient(90deg,#c8163720 0px,transparent 1px,transparent 130px),repeating-linear-gradient(0deg,#bf153323 0px,transparent 1px,transparent 85px),linear-gradient(180deg,#0705074d,#1d0c15b9);box-shadow:0 0 80px #690b1c50}
+.v5-home .seak-particles{position:absolute;inset:0;width:100%;height:100%;opacity:.75;mix-blend-mode:screen}
+.v5-home .seak-world-vignette{position:absolute;inset:0;background:linear-gradient(90deg,#020203 0%,#020203e3 24%,#02020393 42%,transparent 74%),linear-gradient(180deg,#0009,transparent 23%,transparent 72%,#020203d9 100%);z-index:2}
+.v5-home .seak-halo{position:absolute;top:8%;right:4%;width:min(58vw,890px);height:min(58vw,890px);border:1px solid #c81a3c27;border-radius:50%;box-shadow:0 0 130px #b30d3120,inset 0 0 100px #e31a3f0e;transform:rotateX(70deg) rotateZ(25deg);animation:seak-halo-orbit 22s linear infinite}
+.v5-home .halo-two{width:min(48vw,680px);height:min(48vw,680px);top:17%;right:9%;border-color:#e33d5433;animation-duration:30s;animation-direction:reverse}
+.v5-home .seak-hero-layout{position:relative;z-index:3;display:grid;grid-template-columns:minmax(0,54%) minmax(0,46%);align-items:center;flex:1;min-height:690px;padding-block:70px 44px}
+.v5-home .seak-hero-main{position:relative;z-index:5;padding-block:46px 26px;pointer-events:auto}
+.v5-home .seak-label{font-size:10px;letter-spacing:.19em;line-height:1.9;font-weight:800;color:#ddd4da;margin:0 0 35px;display:flex;align-items:center;gap:13px;flex-wrap:wrap}
+.v5-home .seak-slash{color:#e51e44}
+.v5-home .seak-live-dot{width:8px;height:8px;flex:none;background:#e22548;border-radius:50%;box-shadow:0 0 0 6px #e2254824,0 0 17px #ec114e;animation:seak-blink 2.6s ease-in-out infinite}
+.v5-home .seak-headline{font-family:'Manrope',sans-serif;font-size:clamp(57px,6.1vw,106px);line-height:1.04;letter-spacing:-.086em;font-weight:800;margin:0 0 36px;max-width:1000px;text-wrap:balance}
+.v5-home .seak-headline-line{display:block;overflow:hidden;padding-bottom:.075em;margin-bottom:-.075em}
+.v5-home .seak-headline-line>span{display:block;transform:translateY(112%);animation:seak-type-reveal 1.2s cubic-bezier(.2,1,.2,1) forwards}
+.v5-home .seak-headline-line:nth-child(2)>span{animation-delay:.21s}
+.v5-home .seak-headline-line:nth-child(3)>span{animation-delay:.4s}
+.v5-home .seak-headline em{font-style:normal;color:#dd123c;text-shadow:0 0 65px #ac092654}
+.v5-home .seak-headline-line:nth-child(3){font-size:.68em;letter-spacing:-.07em}
+.v5-home .seak-hero-copy{max-width:565px;font-size:16px;line-height:1.88;color:#d5ced4;margin:0 0 31px;animation:seak-fade-up .85s .5s both}
+.v5-home .seak-hero-buttons{display:flex;gap:13px;flex-wrap:wrap;animation:seak-fade-up .85s .7s both}
+.v5-home .seak-action{min-height:55px;padding:14px 21px;display:inline-flex;justify-content:space-between;align-items:center;gap:34px;border:1px solid #c4b7be57;font-size:11px;font-weight:800;letter-spacing:.04em;transition:transform .22s ease,background .22s ease,border-color .22s ease}
+.v5-home .seak-action:hover{transform:translateY(-3px)}
+.v5-home .seak-primary{background:#ae0e31;border-color:#df2951;color:#fff;box-shadow:0 6px 45px #a30a3455}
+.v5-home .seak-primary:hover{background:#cd1541}
+.v5-home .seak-secondary{background:#08090b9c;color:#fff;border-color:#ffffff6b}
+.v5-home .seak-secondary:hover{border-color:#fff;background:#ffffff14}
+.v5-home .seak-hero-proof{display:flex;align-items:center;flex-wrap:wrap;column-gap:22px;row-gap:11px;margin-top:35px;font-size:9px;font-weight:800;letter-spacing:.13em;color:#b5acb3}
+.v5-home .seak-hero-proof span{display:inline-flex;align-items:center;gap:9px}
+.v5-home .seak-hero-proof i{display:inline-block;background:#63c98a;width:7px;height:7px;border-radius:50%;box-shadow:0 0 13px #63c98a7d}
+.v5-home .seak-immersive-stage{position:relative;height:100%;min-height:650px;align-self:stretch;isolation:isolate}
+.v5-home .seak-portrait-environment{position:absolute;inset:5% -17% 2% -25%;overflow:hidden;z-index:1;pointer-events:none;transform:translate3d(calc(var(--seak-mx,0)*-11px),calc(var(--seak-my,0)*-7px),0);transition:transform .32s ease-out;mask-image:linear-gradient(90deg,transparent 0%,#000 24%,#000 79%,transparent 100%),linear-gradient(180deg,transparent,#000 21%,#000 65%,transparent 97%);mask-composite:intersect}
+.v5-home .seak-portrait{height:100%;width:100%;object-fit:contain;object-position:center bottom;opacity:.86;filter:contrast(1.13) saturate(.76) brightness(.74) drop-shadow(4px 2px 22px #bd184050);transform:scale(1.22) translateX(13%);transition:filter .8s ease,opacity .8s ease}
+.v5-home .seak-portrait-sheen{position:absolute;inset:0;z-index:2;background:linear-gradient(112deg,transparent 12%,#09050948 43%,#c70f382a 74%,#02020375);mix-blend-mode:multiply}
+.v5-home .seak-portrait-fade{position:absolute;inset:0;z-index:2;background:radial-gradient(ellipse at 62% 52%,transparent 0%,transparent 33%,#05030583 77%);mix-blend-mode:multiply}
+.v5-home .seak-core-wrap{position:absolute;top:10%;right:-6%;width:min(36vw,460px);aspect-ratio:1;z-index:4;display:flex;flex-direction:column;align-items:center;justify-content:center;transform:translate3d(calc(var(--seak-mx,0)*17px),calc(var(--seak-my,0)*10px),0);transition:transform .35s ease-out}
+.v5-home .seak-core-button{position:relative;display:block;width:min(31vw,390px);aspect-ratio:1;border:0;background:transparent;cursor:pointer;padding:0;overflow:visible;transform-style:preserve-3d;perspective:700px;filter:drop-shadow(0 0 40px #870b304e)}
+.v5-home .seak-core-button:focus-visible{outline:2px solid white;outline-offset:6px;border-radius:50%}
+.v5-home .seak-core-button:hover{filter:drop-shadow(0 0 62px #d21a4f77)}
+.v5-home .seak-core-ring{position:absolute;inset:5%;border-radius:50%;border:2px solid #b51b3c9c;box-shadow:0 0 30px #e31a4634,inset 0 0 18px #a90c3037;animation:seak-spin 18s linear infinite;transform-style:preserve-3d}
+.v5-home .seak-core-ring:before,.v5-home .seak-core-ring:after{content:"";position:absolute;inset:-7px;border-radius:50%;border:1px dashed #f3607977;transform:rotateX(72deg);box-shadow:0 0 24px #b70a3280}
+.v5-home .ring-mid{inset:14%;border:2px solid #ff66819c;transform:rotateY(75deg) rotateX(40deg);animation:seak-spin-reverse 11s linear infinite;box-shadow:0 0 25px #de255a78}
+.v5-home .ring-inner{inset:22%;border:1px solid #ff9aad9e;animation:seak-spin 7s linear infinite;transform:rotateX(65deg) rotateZ(-30deg)}
+.v5-home .seak-core-sphere{position:absolute;inset:28%;border-radius:50%;display:flex;align-items:center;justify-content:center;background:radial-gradient(circle at 36% 25%,#ffe0e929,#d51b4569 11%,#7c0b2b 35%,#150309 68%,#020203 90%);border:1px solid #ff9cad7d;box-shadow:inset -15px -12px 30px #000c,inset 12px 12px 32px #ee205b77,0 0 50px #f11b5355;animation:seak-core-breathe 3.2s ease-in-out infinite alternate;overflow:hidden}
+.v5-home .seak-core-sphere-line{position:absolute;inset:12%;border-radius:50%;border:1px solid #ff728882}
+.v5-home .line-one{transform:rotateX(62deg)}
+.v5-home .line-two{transform:rotateY(62deg)}
+.v5-home .seak-core-monogram{font-size:clamp(16px,2.1vw,33px);letter-spacing:-.09em;font-weight:800;color:#fff;text-shadow:0 0 30px #fff7;z-index:3}
+.v5-home .seak-core-status{position:absolute;top:91%;left:50%;transform:translateX(-50%);min-width:190px;display:flex;align-items:center;justify-content:center;gap:9px;padding:10px 15px;border:1px solid #b8334d69;background:#080608c9;backdrop-filter:blur(16px);font-size:9px;font-weight:800;letter-spacing:.14em;color:#f0d8df;white-space:nowrap;box-shadow:0 0 32px #97133b22}
+.v5-home .seak-status-led{display:block;height:6px;width:6px;border-radius:50%;background:#ff4764;box-shadow:0 0 15px #e42b57}
+.v5-home .seak-core-hint{position:absolute;top:107%;font-size:8px;letter-spacing:.18em;font-weight:800;color:#c3a3af;white-space:nowrap}
+.v5-home .seak-bottomline{z-index:4;position:relative;border-top:1px solid #ffffff30;display:flex;justify-content:space-between;align-items:center;gap:20px;padding:17px 0 24px;font-size:9px;letter-spacing:.16em;font-weight:800;color:#a99da5}
+.v5-home .seak-bottomline b{color:#e5204e;margin-inline:6px}
+.v5-home .seak-bottomline a{color:#f2dde3}
+.v5-home .seak-bottomline a:hover{color:#ff5d7e}
+.v5-home[data-seak-mode="intelligence"] .seak-core-ring{border-color:#ff537b;box-shadow:0 0 60px #ef20587c,inset 0 0 40px #df2a596b;animation-duration:6s}
+.v5-home[data-seak-mode="intelligence"] .ring-mid{animation-duration:3.3s}
+.v5-home[data-seak-mode="intelligence"] .seak-core-sphere{box-shadow:inset -15px -12px 30px #000c,inset 12px 12px 42px #ef275c,0 0 100px #ed185ec4}
+.v5-home[data-seak-mode="intelligence"] .seak-portrait{opacity:.55;filter:contrast(1.12) saturate(.8) brightness(.6)}
+.v5-home[data-seak-mode="intelligence"] .seak-world{background:radial-gradient(ellipse at 68% 48%,#5a0c27 0%,#14040b 48%,#020203 89%)}
+.v5-home[data-seak-mode="intelligence"] .seak-core-status{border-color:#ff667b;color:#fff}
+.v5-home .work-tile{transition:transform .4s cubic-bezier(.2,.8,.2,1),border-color .3s,box-shadow .3s;transform-style:preserve-3d}
+.v5-home .work-tile:hover,.v5-home .featured-work:hover{border-color:#d92a4c;box-shadow:0 17px 68px #8d0d271b}
+.v5-home .work-tile:hover{transform:translateY(-7px)}
+.v5-home .featured-work{transition:border-color .3s,box-shadow .3s}
+.v5-home .expertise-band{background:#080509}
+.v5-home .statement{background:linear-gradient(125deg,#0b060a,#270710)}
+.v5-home .capability{position:relative}
+.v5-home .selected:before{content:"";position:absolute;pointer-events:none;width:140%;height:190%;left:-20%;top:-20%;background:radial-gradient(ellipse at 77% 37%,#80102a1f,transparent 60%);z-index:-1}
+.v5-home .site-footer{background:#030305}
+.inner-page .brand{font-size:clamp(28px,2.7vw,42px);letter-spacing:-.1em}
+.inner-page .brand span{color:#d7183d}
+.inner-page .site-header{background:#040406}
+.inner-page .inner-hero{background:radial-gradient(ellipse at 80% 33%,#3d071951,transparent 62%),#040406}
+.inner-page .v4-kicker:before{background:#b90d30}
+.inner-page .v4-section-title em{color:#db183e}
+@keyframes seak-type-reveal{0%{transform:translateY(112%);filter:blur(10px)}100%{transform:translateY(0);filter:blur(0)}}
+@keyframes seak-fade-up{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+@keyframes seak-blink{50%{box-shadow:0 0 0 12px #e2254805,0 0 30px #ec114e88}}
+@keyframes seak-light-breathe{to{opacity:.84;box-shadow:0 0 42px 10px #d11142ba,0 0 180px 32px #a90e3b66}}
+@keyframes seak-halo-orbit{to{transform:rotateX(70deg) rotateZ(385deg)}}
+@keyframes seak-spin{from{transform:rotateX(65deg) rotateZ(0deg)}to{transform:rotateX(65deg) rotateZ(360deg)}}
+@keyframes seak-spin-reverse{from{transform:rotateY(75deg) rotateX(40deg) rotateZ(0deg)}to{transform:rotateY(75deg) rotateX(40deg) rotateZ(-360deg)}}
+@keyframes seak-core-breathe{to{filter:brightness(1.4);transform:scale(1.08)}}
+@media(max-width:1180px){
+ .v5-home .seak-headline{font-size:clamp(50px,6vw,81px)}
+ .v5-home .seak-hero-layout{grid-template-columns:56% 44%}
+ .v5-home .seak-core-wrap{right:-11%;top:12%}
+ .v5-home .seak-portrait{transform:scale(1.19) translateX(10%)}
+ .v5-home .seak-immersive-stage{min-height:560px}
+}
+@media(max-width:980px){
+ .v5-home .site-header{height:78px}
+ .v5-home .hero.seak-hero{padding-top:80px;min-height:max(860px,100svh)}
+ .v5-home .seak-hero-layout{display:block;min-height:unset;padding-block:55px 60px}
+ .v5-home .seak-hero-main{padding:10px 0;max-width:750px}
+ .v5-home .seak-hero-copy{max-width:560px}
+ .v5-home .seak-immersive-stage{height:500px;min-height:500px;width:100%;margin-top:0}
+ .v5-home .seak-portrait-environment{inset:0 -4% 0 16%}
+ .v5-home .seak-portrait{transform:scale(1.05) translateX(5%)}
+ .v5-home .seak-core-wrap{width:400px;top:0;right:3%}
+ .v5-home .seak-core-button{width:350px}
+ .v5-home .seak-world-vignette{background:linear-gradient(180deg,#020203df,transparent 21%,transparent 69%,#020203cc),linear-gradient(90deg,#020203ed,transparent 70%)}
+ .v5-home .seak-halo{width:600px;height:600px;right:-100px}
+ .v5-home .seak-bottomline{gap:10px;font-size:8px}
+}
+@media(max-width:650px){
+ .v5-home .hero.seak-hero{min-height:0;padding-top:80px}
+ .v5-home .seak-hero-layout{padding-top:42px;padding-bottom:18px}
+ .v5-home .seak-label{font-size:8px;letter-spacing:.11em;gap:9px;margin-bottom:19px}
+ .v5-home .seak-headline{font-size:clamp(39px,9.6vw,61px);line-height:1.07;margin-bottom:25px;letter-spacing:-.07em}
+ .v5-home .seak-headline-line:nth-child(3){font-size:.73em}
+ .v5-home .seak-hero-copy{font-size:13px;line-height:1.8;max-width:550px}
+ .v5-home .seak-hero-buttons{gap:9px}
+ .v5-home .seak-action{padding:13px 16px;min-height:52px;font-size:10px;gap:12px}
+ .v5-home .seak-hero-proof{margin-top:20px;font-size:8px}
+ .v5-home .seak-immersive-stage{height:380px;min-height:380px;margin-top:10px}
+ .v5-home .seak-portrait-environment{inset:3% -18% 0 -15%;mask-image:linear-gradient(90deg,transparent,#000 22%,#000 76%,transparent),linear-gradient(180deg,transparent 0%,#000 18%,#000 67%,transparent);mask-composite:intersect}
+ .v5-home .seak-portrait{transform:scale(1.06) translateX(0);opacity:.8}
+ .v5-home .seak-core-wrap{width:230px;right:-2%;top:5%}
+ .v5-home .seak-core-button{width:211px}
+ .v5-home .seak-core-status{min-width:130px;font-size:7px;padding:8px}
+ .v5-home .seak-core-hint{font-size:7px;top:108%}
+ .v5-home .seak-core-monogram{font-size:18px}
+ .v5-home .seak-bottomline{font-size:7px;gap:9px}
+ .v5-home .seak-ticker{display:none}
+ .v5-home .seak-light-shaft{left:80%}
+ .v5-home .seak-world-vignette{background:linear-gradient(180deg,#020203e8,transparent 32%,#020203d6),linear-gradient(90deg,#020203c2,transparent 85%)}
+ .v5-home .seak-architectural-shell{inset:-10%}
+}
+@media(max-width:390px){
+ .v5-home .seak-headline{font-size:36px}
+ .v5-home .seak-immersive-stage{height:320px;min-height:320px}
+ .v5-home .seak-core-wrap{width:185px;right:-4%}
+ .v5-home .seak-core-button{width:170px}
+ .v5-home .seak-core-monogram{font-size:14px}
+ .v5-home .seak-hero-buttons{flex-direction:row}
+}
+@media(prefers-reduced-motion:reduce){
+ .v5-home .seak-headline-line>span{transform:none!important;filter:none!important;animation:none!important}
+ .v5-home .seak-world *,.v5-home .seak-core-wrap *, .v5-home .seak-hero-main *{animation:none!important;transition:none!important}
+ .v5-home .seak-particles{opacity:.35}
+ .v5-home .seak-core-ring{transform:rotateX(60deg) rotateZ(22deg)}
+ .v5-home .seak-core-sphere{transform:none}
+}
+
+/* Selector specificity intentionally exceeds legacy V5 hero rules. */
+.v5-home .hero.seak-hero .seak-headline{font-family:"Manrope",system-ui,sans-serif;font-weight:800;font-size:clamp(57px,6.1vw,106px);line-height:1.04;letter-spacing:-.086em;max-width:1000px;margin:0 0 36px}
+.v5-home .hero.seak-hero .seak-headline-line{display:block;white-space:nowrap}
+.v5-home .hero.seak-hero .seak-headline-line:nth-child(3){font-size:.87em}
+.v5-home .hero.seak-hero .seak-headline-line em{color:#ee1d48}
+.v5-home .hero.seak-hero .seak-hero-layout{width:min(1380px,calc(100% - clamp(32px,7.2vw,132px)))}
+.v5-home .seak-core-button:active .seak-core-sphere{filter:brightness(1.8)}
+@media(max-width:1180px){.v5-home .hero.seak-hero .seak-headline{font-size:clamp(50px,6vw,81px)}}
+@media(max-width:980px){.v5-home .hero.seak-hero .seak-headline{font-size:clamp(49px,8vw,80px)}}
+@media(max-width:650px){
+ .v5-home .hero.seak-hero .seak-headline{font-size:clamp(38px,9vw,58px);line-height:1.07;margin-bottom:25px}
+ .v5-home .hero.seak-hero .seak-headline-line{white-space:normal}
+ .v5-home .hero.seak-hero .seak-headline-line:nth-child(3){font-size:.92em}
+ .v5-home .hero.seak-hero .seak-hero-layout{width:calc(100% - 38px)}
+}
+@media(max-width:390px){.v5-home .hero.seak-hero .seak-headline{font-size:36px}}
