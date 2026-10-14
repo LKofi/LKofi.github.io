@@ -104,6 +104,7 @@ const THREE_URL="https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.j
   // Glow uses canvas-generated texture (not a fake DOM image).
   const glowCanvas=document.createElement("canvas");glowCanvas.width=128;glowCanvas.height=128;
   const g=glowCanvas.getContext("2d");
+  if(!g)throw Error("Canvas 2D texture context unavailable");
   const gradient=g.createRadialGradient(64,64,1,64,64,63);
   gradient.addColorStop(0,"rgba(255,83,123,.82)");gradient.addColorStop(.18,"rgba(209,12,58,.35)");
   gradient.addColorStop(.55,"rgba(147,5,39,.12)");gradient.addColorStop(1,"rgba(0,0,0,0)");
@@ -198,7 +199,8 @@ const THREE_URL="https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.j
  document.addEventListener("visibilitychange",refresh);
  window.addEventListener("pagehide",()=>{enabled=false;stop();intersection.disconnect();ro.disconnect();renderer.dispose();});
  reduced.addEventListener?.("change",refresh);
- window.addEventListener("webglcontextlost",function(e){e.preventDefault();enabled=false;stop();canvas.hidden=true;document.body.classList.remove("seak-webgl-ready");},{passive:false});
+ canvas.addEventListener("webglcontextlost",function(e){e.preventDefault();enabled=false;stop();canvas.hidden=true;document.body.classList.remove("seak-webgl-ready");},{passive:false});
+ canvas.hidden=false;
  document.body.classList.add("seak-webgl-ready");
  size();refresh();
 })();
