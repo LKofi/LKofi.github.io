@@ -159,3 +159,20 @@ body.v5-home{background:var(--seak-black);color:var(--seak-white)}
  .v5-home .seak-core-ring{transform:rotateX(60deg) rotateZ(22deg)}
  .v5-home .seak-core-sphere{transform:none}
 }
+
+/* Selector specificity intentionally exceeds legacy V5 hero rules. */
+.v5-home .hero.seak-hero .seak-headline{font-family:"Manrope",system-ui,sans-serif;font-weight:800;font-size:clamp(57px,6.1vw,106px);line-height:1.04;letter-spacing:-.086em;max-width:1000px;margin:0 0 36px}
+.v5-home .hero.seak-hero .seak-headline-line{display:block;white-space:nowrap}
+.v5-home .hero.seak-hero .seak-headline-line:nth-child(3){font-size:.87em}
+.v5-home .hero.seak-hero .seak-headline-line em{color:#ee1d48}
+.v5-home .hero.seak-hero .seak-hero-layout{width:min(1380px,calc(100% - clamp(32px,7.2vw,132px)))}
+.v5-home .seak-core-button:active .seak-core-sphere{filter:brightness(1.8)}
+@media(max-width:1180px){.v5-home .hero.seak-hero .seak-headline{font-size:clamp(50px,6vw,81px)}}
+@media(max-width:980px){.v5-home .hero.seak-hero .seak-headline{font-size:clamp(49px,8vw,80px)}}
+@media(max-width:650px){
+ .v5-home .hero.seak-hero .seak-headline{font-size:clamp(38px,9vw,58px);line-height:1.07;margin-bottom:25px}
+ .v5-home .hero.seak-hero .seak-headline-line{white-space:normal}
+ .v5-home .hero.seak-hero .seak-headline-line:nth-child(3){font-size:.92em}
+ .v5-home .hero.seak-hero .seak-hero-layout{width:calc(100% - 38px)}
+}
+@media(max-width:390px){.v5-home .hero.seak-hero .seak-headline{font-size:36px}}
