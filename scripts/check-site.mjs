@@ -24,6 +24,7 @@ for(const f of pages){
   if(!fs.existsSync(dest))throw Error('Broken local reference '+f+' → '+url);
  }
 }
+for(const [page,label] of Object.entries({'projects.html':'Projects','about.html':'About','experience.html':'Experience','contact.html':'Contact'})){if(!fs.readFileSync(page,'utf8').includes('<title>'+label+' — Sukkah Emmanuel</title>'))throw Error('Incorrect browser title '+page)}
 const home=fs.readFileSync('index.html','utf8');
 for(const marker of ['id="hero-title"','href="/projects.html"','href="/contact.html"','/assets/v3-home.css','/assets/v3-home.js','Bodoni+Moda','og:image'])if(!home.includes(marker))throw Error('Homepage regression '+marker);
 if(home.includes('after the homepage design is approved'))throw Error('Preview-only copy published');
