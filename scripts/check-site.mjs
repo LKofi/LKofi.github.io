@@ -3,9 +3,9 @@ import fs from 'node:fs';
 import path from 'node:path';
 import {spawnSync} from 'node:child_process';
 const pages=['index.html','projects.html','about.html','experience.html','contact.html','resume.html'];
-const assets=['assets/v2.css','assets/v2.js','assets/v3-home.css','assets/v3-home.js','assets/v4-inner.css','assets/v4-inner.js','assets/v3-hero.webp','assets/v3-flow-demo.webp','assets/v5.css','assets/v5.js','assets/v5-immersive.css','assets/v5-immersive.js','assets/hero-portrait.webp','assets/Sukkah_Emmanuel_CV_2026.pdf','assets/mark.svg'];
+const assets=['assets/v2.css','assets/v2.js','assets/v3-home.css','assets/v3-home.js','assets/v4-inner.css','assets/v4-inner.js','assets/v3-hero.webp','assets/v3-flow-demo.webp','assets/v5.css','assets/v5.js','assets/v5-immersive.css','assets/v5-immersive.js','assets/v5-world.mjs','assets/hero-portrait.webp','assets/Sukkah_Emmanuel_CV_2026.pdf','assets/mark.svg'];
 for(const f of [...pages,...assets])if(!fs.existsSync(f))throw Error('Missing '+f);
-for(const file of ['assets/v2.js','assets/v3-home.js','assets/v4-inner.js','assets/v5.js','assets/v5-immersive.js']){
+for(const file of ['assets/v2.js','assets/v3-home.js','assets/v4-inner.js','assets/v5.js','assets/v5-immersive.js','assets/v5-world.mjs']){
  const r=spawnSync(process.execPath,['--check',file],{encoding:'utf8'});
  if(r.status!==0)throw Error('JavaScript syntax: '+file+'\n'+r.stderr);
 }
@@ -62,7 +62,7 @@ const homeText=fs.readFileSync('index.html','utf8');
 for(const item of ['id="hero-title"','href="/projects.html#mernorahflow"','href="/projects.html#securegate"','href="/projects.html#roxzy"','href="/assets/Sukkah_Emmanuel_CV_2026.pdf"'])if(!homeText.includes(item))throw Error('Recruiter conversion link missing '+item);
 
 const immersiveHome=fs.readFileSync('index.html','utf8');
-for (const item of ['SEAK<span>.</span>','class="hero seak-hero"','id="seak-core-toggle"','id="seak-particles"','/assets/v5-immersive.css','/assets/v5-immersive.js','/assets/v3-hero.webp']) {
+for (const item of ['SEAK<span>.</span>','class="hero seak-hero"','id="seak-core-toggle"','id="seak-particles"','/assets/v5-immersive.css','/assets/v5-immersive.js','/assets/v5-world.mjs','id="seak-world-3d"','/assets/v3-hero.webp']) {
  if(!immersiveHome.includes(item))throw Error('V5 immersive requirement missing '+item);
 }
 for(const file of ['projects.html','about.html','experience.html','contact.html']) {
@@ -72,4 +72,8 @@ for(const file of ['projects.html','about.html','experience.html','contact.html'
 const immersiveJS=fs.readFileSync('assets/v5-immersive.js','utf8');
 for(const t of ['requestAnimationFrame','prefers-reduced-motion','aria-pressed','visibilitychange','IntersectionObserver'])
  if(!immersiveJS.includes(t))throw Error('Immersive interactivity or accessibility regression: '+t);
+
+const world=fs.readFileSync('assets/v5-world.mjs','utf8');
+for(const item of ['three@0.180.0','new THREE.WebGLRenderer','new THREE.MeshPhysicalMaterial','IntersectionObserver','prefers-reduced-motion','seak-webgl-ready','canvas.hidden=false'])if(!world.includes(item))throw Error('3D world regression '+item);
+if(/https?:\/\/(?!cdn\.jsdelivr\.net)/i.test(world))throw Error('Unexpected external 3D source');
 console.log('PASS — six pages, navigation references, nine case studies, five JS bundles, fonts, CV and contact fallback.');
