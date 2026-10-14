@@ -34,4 +34,30 @@ for(const id of ids)if(!projects.includes('id="'+id+'"')||!projects.includes('id
 const contact=fs.readFileSync('contact.html','utf8');
 if(!contact.includes('action="https://formsubmit.co/ajax/'))throw Error('Missing contact relay');
 if(!contact.includes('mailto:sukahemmanuelkofi@gmail.com'))throw Error('Missing email fallback');
+
+// Pre-release hardening checks for accessibility, recruiter links and the approved CV.
+for (const file of pages) {
+ const html=fs.readFileSync(file,'utf8');
+ const headings=[...html.matchAll(/<h1\b/gi)];
+ if(headings.length!==1)throw Error('Expected one H1 in '+file+'; found '+headings.length);
+ if(/\s+on(?:click|load|error|mouseover|focus)\s*=/i.test(html))throw Error('Inline event handler in '+file);
+ const ids=[...html.matchAll(/\bid=["']([^"']+)["']/g)].map(x=>x[1]);
+ if(ids.length!==new Set(ids).size)throw Error('Duplicate IDs in '+file);
+ for(const tag of html.matchAll(/<img\b[^>]*>/gi))if(!/\balt=["']/.test(tag[0]))throw Error('Image missing alt in '+file);
+ for(const link of html.matchAll(/<a\b[^>]*target=["']_blank["'][^>]*>/gi))if(!/\brel=["'][^"']*noopener/.test(link[0]))throw Error('Unsafe target=_blank in '+file);
+ for(const m of html.matchAll(/href=["']([^"']+#[^"']+)["']/g)){
+  const [pathname,fragment]=m[1].split('#');
+  if(!fragment)continue;
+  const dest=pathname?pathname.startsWith('/')?path.join(process.cwd(),pathname.slice(1)):path.join(process.cwd(),path.dirname(file),pathname):path.join(process.cwd(),file);
+  if(!fs.existsSync(dest))throw Error('Missing fragment destination '+file+' → '+m[1]);
+  const target=fs.readFileSync(dest,'utf8');
+  if(!target.includes('id="'+decodeURIComponent(fragment)+'"')&&!target.includes("id='"+decodeURIComponent(fragment)+"'"))throw Error('Broken fragment '+file+' → '+m[1]);
+ }
+}
+const {createHash}=await import('node:crypto');
+const cv=fs.readFileSync('assets/Sukkah_Emmanuel_CV_2026.pdf');
+const cvSha=createHash('sha1').update(Buffer.from('blob '+cv.length+'\0')).update(cv).digest('hex');
+if(cvSha!=='bee9ac49c2821b797e6beae151a8f925e066924c')throw Error('Approved 2026 CV changed; re-verify before release');
+const homeText=fs.readFileSync('index.html','utf8');
+for(const item of ['id="hero-title"','href="/projects.html#mernorahflow"','href="/projects.html#securegate"','href="/projects.html#roxzy"','href="/assets/Sukkah_Emmanuel_CV_2026.pdf"'])if(!homeText.includes(item))throw Error('Recruiter conversion link missing '+item);
 console.log('PASS — six pages, navigation references, nine case studies, five JS bundles, fonts, CV and contact fallback.');
