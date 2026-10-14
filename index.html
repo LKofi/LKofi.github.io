@@ -20,7 +20,7 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="preload" href="/assets/hero-portrait.webp" as="image" type="image/webp">
 <link rel="stylesheet" href="/assets/v5.css"><link rel="stylesheet" href="/assets/v5-immersive.css">
-<script src="/assets/v5.js" defer></script><script src="/assets/v5-immersive.js" defer></script>
+<script src="/assets/v5.js" defer></script><script src="/assets/v5-immersive.js" defer></script><script type="module" src="/assets/v5-world.mjs"></script>
 <title>Sukkah Emmanuel — Software Engineer | Backend, Cloud & Secure Systems</title>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","name":"Sukkah Emmanuel Kofi Ariel","jobTitle":"Software Engineer","url":"https://lkofi.github.io/","email":"mailto:sukahemmanuelkofi@gmail.com","homeLocation":{"@type":"Place","name":"Accra, Ghana"},"sameAs":["https://github.com/LKofi"]}</script>
 </head>
@@ -39,6 +39,7 @@
 </header>
 <main id="main">
 <section class="hero seak-hero" id="home" aria-labelledby="hero-title">
+  <canvas class="seak-world-3d" id="seak-world-3d" aria-hidden="true" hidden></canvas>
   <div class="seak-world" aria-hidden="true">
     <div class="seak-architectural-shell"><div class="seak-wall wall-a"></div><div class="seak-wall wall-b"></div><div class="seak-light-shaft"></div><div class="seak-depth-floor"></div></div>
     <canvas id="seak-particles" class="seak-particles"></canvas>
