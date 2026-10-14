@@ -76,4 +76,10 @@ for(const t of ['requestAnimationFrame','prefers-reduced-motion','aria-pressed',
 const world=fs.readFileSync('assets/v5-world.mjs','utf8');
 for(const item of ['three@0.180.0','new THREE.WebGLRenderer','new THREE.MeshPhysicalMaterial','IntersectionObserver','prefers-reduced-motion','seak-webgl-ready','canvas.hidden=false'])if(!world.includes(item))throw Error('3D world regression '+item);
 if(/https?:\/\/(?!cdn\.jsdelivr\.net)/i.test(world))throw Error('Unexpected external 3D source');
+
+// The V5.2 art-direction correction must not regress into a face-obscuring hero.
+const heroV52=fs.readFileSync('index.html','utf8');
+for(const required of ['Engineering systems that matter.','<span>systems</span>','<span><em>that matter.</em></span>','seak-label-small','id="seak-core-toggle"'])if(!heroV52.includes(required))throw Error('V5.2 hero composition regression '+required);
+const immersiveCss=fs.readFileSync('assets/v5-immersive.css','utf8');
+for(const required of ['V5.2 — Visual correction','z-index:1!important','top:auto!important;bottom:12%!important','seak-label-small{display:inline}'])if(!immersiveCss.includes(required))throw Error('V5.2 visual regression '+required);
 console.log('PASS — six pages, navigation references, nine case studies, five JS bundles, fonts, CV and contact fallback.');
