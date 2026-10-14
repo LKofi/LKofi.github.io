@@ -219,3 +219,150 @@ body.v5-home{background:var(--seak-black);color:var(--seak-white)}
  .v5-home.seak-webgl-ready .seak-core-ring,
  .v5-home.seak-webgl-ready .seak-core-sphere{visibility:visible!important;opacity:1!important}
 }
+
+/* V5.2 — Visual correction after actual desktop/mobile screenshots.
+   Preserve the human face; make the engineering core a separate instrument,
+   and give the architectural world quiet, physical-looking depth. */
+.v5-home .hero.seak-hero .seak-headline{font-size:clamp(57px,5.5vw,88px);line-height:1.07;letter-spacing:-.065em}
+.v5-home .hero.seak-hero .seak-headline-line{padding-bottom:.12em;margin-bottom:-.12em}
+.v5-home .hero.seak-hero .seak-headline-line:nth-child(3){font-size:.88em;letter-spacing:-.06em}
+.v5-home .seak-label-small{display:none}
+.v5-home .seak-label-long{display:inline}
+.v5-home .seak-immersive-stage{isolation:isolate}
+.v5-home .seak-immersive-stage:before{
+  content:"";position:absolute;inset:5% 4% -2% 8%;z-index:0;pointer-events:none;
+  border-radius:3px 3px 0 0;
+  background:
+   linear-gradient(98deg,transparent 45%,rgba(242,233,245,.055) 46%,transparent 47%),
+   linear-gradient(160deg,rgba(255,255,255,.055),transparent 29%),
+   radial-gradient(ellipse at 68% 35%,rgba(205,29,68,.19),transparent 63%),
+   linear-gradient(90deg,rgba(0,0,0,.15),rgba(35,30,41,.31),rgba(1,1,3,.15));
+  border-left:1px solid rgba(233,188,203,.19);border-right:1px solid rgba(148,23,55,.18);
+  box-shadow:0 0 75px rgba(0,0,0,.5),inset -25px 0 45px rgba(0,0,0,.33);
+}
+.v5-home .seak-immersive-stage:after{
+  content:"";position:absolute;z-index:2;pointer-events:none;
+  left:10%;right:-7%;bottom:0;height:16%;
+  background:linear-gradient(0deg,rgba(2,2,4,.97),transparent);
+}
+.v5-home .seak-portrait-environment{
+  inset:1% -12% 0 -14%;
+  z-index:2;opacity:1;
+  mask-image:linear-gradient(90deg,transparent 0%,#000 12%,#000 84%,transparent 100%),
+             linear-gradient(180deg,transparent 0%,#000 12%,#000 80%,transparent 100%);
+  mask-composite:intersect;
+}
+.v5-home .seak-portrait,.v5-home.seak-webgl-ready .seak-portrait{
+  object-position:center bottom;
+  transform:scale(1.06) translateX(5%);
+  opacity:1!important;
+  mix-blend-mode:normal!important;
+  filter:contrast(1.065) saturate(.92) brightness(.99) drop-shadow(14px 2px 40px rgba(0,0,0,.45))!important;
+}
+.v5-home .seak-portrait-sheen{
+  pointer-events:none;background:linear-gradient(90deg,transparent 65%,rgba(157,6,34,.13));
+  mix-blend-mode:normal;opacity:.45;
+}
+.v5-home .seak-portrait-fade{
+  background:radial-gradient(ellipse at 50% 47%,transparent 25%,rgba(4,4,7,.11) 79%);
+  mix-blend-mode:normal;
+}
+/* The core's control is moved to a small lower-right module, away from the face. */
+.v5-home .seak-core-wrap{
+  top:auto!important;bottom:12%!important;right:-2%!important;
+  width:190px!important;height:190px!important;aspect-ratio:1;
+  z-index:7!important;
+  transform:translate3d(0,0,0)!important;
+}
+.v5-home .seak-core-button{
+  display:block;width:154px!important;height:154px!important;
+  background:radial-gradient(circle,rgba(60,5,17,.29),rgba(2,2,5,.47) 70%,transparent 76%);
+  margin-inline:auto;
+}
+.v5-home .seak-core-monogram{font-size:19px!important}
+.v5-home .seak-core-status{
+  top:87%;min-width:184px;font-size:8px;z-index:9;
+  backdrop-filter:blur(15px);
+}
+.v5-home .seak-core-hint{top:111%;font-size:7px;letter-spacing:.15em}
+/* The WebGL scene belongs behind the subject, never across eyes or facial features. */
+.v5-home .seak-world-3d{z-index:1!important;mix-blend-mode:normal!important;opacity:.78!important;filter:saturate(.92)}
+.v5-home .seak-world-3d~.seak-world{z-index:0}
+.v5-home .seak-world-3d~.seak-hero-layout{z-index:3}
+.v5-home.seak-webgl-ready .seak-core-ring,
+.v5-home.seak-webgl-ready .seak-core-sphere{
+  visibility:visible!important;opacity:.72!important;animation-duration:17s!important;
+}
+.v5-home.seak-webgl-ready .seak-core-button{
+  border:1px solid rgba(224,43,82,.21);border-radius:50%;
+}
+.v5-home .seak-world{
+  background:
+   radial-gradient(ellipse at 79% 49%,rgba(71,9,25,.47),transparent 41%),
+   radial-gradient(ellipse at 60% 15%,rgba(97,83,100,.12),transparent 43%),
+   linear-gradient(120deg,#020305,#090609 55%,#040304);
+}
+.v5-home .seak-world:after{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(ellipse at 78% 27%,rgba(243,223,231,.1),transparent 23%);
+}
+.v5-home .seak-wall{
+  opacity:.62;
+  border-left:1px solid rgba(171,161,166,.17);
+  border-right:1px solid rgba(178,82,98,.1);
+  background:linear-gradient(90deg,rgba(0,0,0,.3),rgba(23,20,27,.4) 45%,rgba(8,5,9,.82) 80%);
+}
+.v5-home .seak-depth-floor{opacity:.24;filter:blur(.5px)}
+.v5-home .seak-light-shaft{opacity:.23;box-shadow:0 0 35px rgba(145,16,49,.4)}
+.v5-home .seak-halo{opacity:.21}
+.v5-home .seak-particles{opacity:.44}
+.v5-home.seak-webgl-ready .seak-particles{opacity:.12}
+.v5-home .seak-world-vignette{
+  background:
+    linear-gradient(90deg,#020203 0%,rgba(2,2,3,.93) 18%,rgba(2,2,3,.65) 42%,rgba(2,2,3,.10) 82%),
+    linear-gradient(180deg,rgba(0,0,0,.77),transparent 24%,transparent 74%,#020203de);
+}
+@media(max-width:1180px){
+ .v5-home .hero.seak-hero .seak-headline{font-size:clamp(48px,5.4vw,74px)}
+ .v5-home .seak-core-wrap{right:-3%!important;bottom:11%!important}
+}
+@media(max-width:980px){
+ .v5-home .hero.seak-hero .seak-headline{font-size:clamp(47px,7.2vw,75px)}
+ .v5-home .seak-portrait-environment{inset:1% -8% 0 4%}
+ .v5-home .seak-core-wrap{right:3%!important;bottom:13%!important}
+ .v5-home .seak-core-button{width:146px!important;height:146px!important}
+}
+@media(max-width:650px){
+ .v5-home .hero.seak-hero .seak-headline{font-size:clamp(38px,9.4vw,57px);line-height:1.10;margin-bottom:22px;letter-spacing:-.067em}
+ .v5-home .hero.seak-hero .seak-headline-line:nth-child(3){font-size:.96em}
+ .v5-home .seak-label-small{display:inline}
+ .v5-home .seak-label-long{display:none}
+ .v5-home .seak-hero-buttons{display:flex;gap:12px;flex-wrap:nowrap}
+ .v5-home .seak-action{flex:1;justify-content:center;gap:12px;min-height:54px;padding:12px 12px;font-size:11px;white-space:nowrap}
+ .v5-home .seak-immersive-stage{height:335px;min-height:335px;margin-top:-5px}
+ .v5-home .seak-immersive-stage:before{inset:5% -1% 0 0}
+ .v5-home .seak-portrait-environment{inset:-3% -12% -3% -6%}
+ .v5-home .seak-portrait,.v5-home.seak-webgl-ready .seak-portrait{transform:scale(1.06) translateX(-2%);opacity:1!important}
+ .v5-home .seak-core-wrap{
+    width:126px!important;height:142px!important;
+    right:0!important;bottom:8%!important;
+ }
+ .v5-home .seak-core-button{width:111px!important;height:111px!important}
+ .v5-home .seak-core-status{top:90%;min-width:132px;font-size:6px;padding:7px}
+ .v5-home .seak-core-hint{display:none}
+ .v5-home .seak-core-monogram{font-size:13px!important}
+ .v5-home .seak-world-3d{opacity:.45!important}
+ .v5-home .seak-depth-floor{opacity:.12}
+ .v5-home .seak-world-vignette{background:linear-gradient(180deg,#020203e8 0%,#030304cf 21%,rgba(3,3,5,.6) 42%,transparent 68%,#020203c7 100%)}
+ .v5-home .seak-bottomline{position:relative}
+}
+@media(max-width:390px){
+ .v5-home .hero.seak-hero .seak-headline{font-size:clamp(35px,9vw,39px)}
+ .v5-home .seak-hero-buttons{gap:8px}
+ .v5-home .seak-action{font-size:10px}
+ .v5-home .seak-immersive-stage{height:300px;min-height:300px}
+ .v5-home .seak-core-wrap{bottom:8%!important;right:-1%!important}
+}
+@media(prefers-reduced-motion:reduce){
+ .v5-home .seak-core-ring,.v5-home .seak-core-sphere{animation:none!important}
+}
