@@ -3,7 +3,7 @@
    The approved photographic image is never regenerated. */
 :root{--seak-black:#030305;--seak-crimson:#9d0b26;--seak-red:#cb1434;--seak-white:#fcfbfc}
 body.v5-home{background:var(--seak-black);color:var(--seak-white)}
-.v5-home .site-header{position:absolute;top:0;left:0;right:0;z-index:100;background:linear-gradient(180deg,#030305d9,#0303052e);border-bottom:1px solid #ffffff19;backdrop-filter:blur(10px)}
+.v5-home .site-header{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(8,9,13,0.75);border-bottom:1px solid rgba(255,255,255,0.08);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px)}
 .v5-home .brand{font-size:29px;letter-spacing:-.092em;font-family:'Manrope',sans-serif;white-space:nowrap;margin-right:0}
 .v5-home .brand span{letter-spacing:-.1em;color:#d41438}
 .v5-home .brand small{font-size:8px;letter-spacing:.16em}
@@ -84,12 +84,12 @@ body.v5-home{background:var(--seak-black);color:var(--seak-white)}
 .v5-home .capability{position:relative}
 .v5-home .selected:before{content:"";position:absolute;pointer-events:none;width:140%;height:190%;left:-20%;top:-20%;background:radial-gradient(ellipse at 77% 37%,#80102a1f,transparent 60%);z-index:-1}
 .v5-home .site-footer{background:#030305}
-.inner-page .brand{font-size:clamp(28px,2.7vw,42px);letter-spacing:-.1em}
-.inner-page .brand span{color:#d7183d}
-.inner-page .site-header{background:#040406}
-.inner-page .inner-hero{background:radial-gradient(ellipse at 80% 33%,#3d071951,transparent 62%),#040406}
-.inner-page .v4-kicker:before{background:#b90d30}
-.inner-page .v4-section-title em{color:#db183e}
+.inner-page .brand{font-size:24px;letter-spacing:-.06em}
+.inner-page .brand span{color:var(--page-crimson,#e11d48)}
+.inner-page .site-header{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(8,9,13,0.75);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,0.08)}
+.inner-page .inner-hero{background:transparent}
+.inner-page .v4-kicker:before{background:var(--page-crimson,#e11d48)}
+.inner-page .v4-section-title em{color:var(--page-accent,#f43f5e)}
 @keyframes seak-type-reveal{0%{transform:translateY(112%);filter:blur(10px)}100%{transform:translateY(0);filter:blur(0)}}
 @keyframes seak-fade-up{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
 @keyframes seak-blink{50%{box-shadow:0 0 0 12px #e2254805,0 0 30px #ec114e88}}
