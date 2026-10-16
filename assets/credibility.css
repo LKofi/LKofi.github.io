@@ -1,4 +1,8 @@
 /* SEAK — evidence-driven case study and recruiter experience. */
+.home-page .stage-wrap{display:block;min-height:0;padding:0}
+.hero-viewport{min-height:100svh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:5.4vh 0 3vh}
+@media(max-width:650px){.hero-viewport{padding:4vh 0 2vh}}
+
 .proof-section{position:relative;z-index:0;margin:clamp(32px,5vw,90px) auto clamp(65px,8vw,120px);padding:0 0 20px}
 .proof-section__header{display:flex;justify-content:space-between;align-items:end;gap:28px;border-bottom:1px solid #51545d;padding-bottom:24px;margin-bottom:22px}
 .proof-section__header h2{font-size:clamp(29px,4.2vw,60px);line-height:1.05;letter-spacing:-.06em;margin:15px 0 0}
