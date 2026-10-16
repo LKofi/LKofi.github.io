@@ -18,7 +18,7 @@ jobs:
         with:
           node-version: '22'
       - name: Install browser test driver
-        run: npm install --no-save --package-lock=false --ignore-scripts playwright-core@1.56.1
+        run: npm install --no-save --package-lock=false --ignore-scripts playwright-core@1.56.1 axe-core@4.10.3
       - name: Choose browser
         shell: bash
         run: |

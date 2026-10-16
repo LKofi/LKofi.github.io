@@ -178,3 +178,19 @@ a{color:inherit;text-decoration:none}button,input,textarea,select{font:inherit}b
 .stage__visit{height:clamp(44px,3.7vw,52px);min-width:44px;font-size:10px;line-height:1;font-weight:800;letter-spacing:.06em}
 .stage__visit:hover{transform:translateY(-2px)}
 @media(max-width:650px){.stage__right-arrow{font-size:11px;right:7%;width:58px;min-height:44px}.stage__visit{height:44px;font-size:10px;right:8%}}
+
+/* Legibility pass: decorative metadata and supporting text */
+.stage__count,.stage__bottom-index{font-size:11px;color:#bdc1cb}
+.nav-panel__meta,.nav-panel__meta span{font-size:11px}
+.nav-panel__link small{font-size:12px}
+.stage__info p{font-size:clamp(12px,1.0vw,14px);color:#c5c8d1}
+.stage__info h2{font-size:clamp(13px,1.2vw,18px)}
+.stage-under{font-size:clamp(11px,.82vw,13px);color:#d8d9df}
+.note,.minor{color:#c9cbd3}
+a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible,summary:focus-visible{outline:3px solid #ffad74;outline-offset:4px}
+@media(max-width:650px){.stage__info p{font-size:12px;line-height:1.48}.stage__info h2{font-size:13px}.stage-under{font-size:11px}.stage__count{font-size:11px}}
+
+/* Footer links wrap without causing horizontal mobile overflow. */
+.footer__links{display:flex;flex-wrap:wrap;column-gap:clamp(12px,2vw,24px);row-gap:14px;max-width:100%;min-width:0}
+.footer__links a{white-space:nowrap;min-height:32px;display:inline-flex;align-items:center}
+@media(max-width:650px){.footer{align-items:flex-start}.footer__links{width:100%;justify-content:flex-start}.footer>span{max-width:100%}}

@@ -10,6 +10,17 @@ const browser=await chromium.launch({
 });
 const errors=[];
 const report=[];
+const axeSource=fs.readFileSync('node_modules/axe-core/axe.min.js','utf8');
+async function auditAccessibility(page,label){
+ await page.addScriptTag({content:axeSource});
+ const findings=await page.evaluate(async()=>{
+  const r=await window.axe.run(document,{runOnly:{type:'tag',values:['wcag2a','wcag2aa','wcag21a','wcag21aa']}});
+  return r.violations.map(v=>({id:v.id,impact:v.impact,description:v.description,count:v.nodes.length,targets:v.nodes.slice(0,5).map(n=>({selector:n.target,summary:(n.failureSummary||'').slice(0,250)}))}));
+ });
+ report.push({accessibility:label,violations:findings});
+ for(const issue of findings.filter(v=>v.impact==='critical'))errors.push(label+' critical accessibility: '+JSON.stringify(issue));
+}
+
 const checks=(condition,message)=>{if(!condition)errors.push(message)};
 fs.mkdirSync('test-output',{recursive:true});
 for(const viewport of [{width:1440,height:900,name:'desktop'},{width:390,height:844,name:'mobile'},{width:360,height:740,name:'small-mobile'}]){
@@ -20,6 +31,8 @@ for(const viewport of [{width:1440,height:900,name:'desktop'},{width:390,height:
  checks(resp?.status()===200,viewport.name+': home did not return 200');
  checks(await page.locator('h1').count()===1,viewport.name+': home should have one H1');
  checks(await page.locator('#engineering-proof').count()===1,viewport.name+': engineering proof section missing');
+ checks(await page.locator('.audience__card').count()===3,viewport.name+': audience pathways missing');
+ if(viewport.name!=='small-mobile')await auditAccessibility(page,viewport.name+' homepage');
  checks(await page.locator('a[href="/case-studies/securegate.html"]').count()>0,viewport.name+': case study is not linked');
  const sizes=await page.evaluate(()=>({width:document.documentElement.clientWidth,scrollWidth:document.documentElement.scrollWidth,hero:document.querySelector('.stage')?.getBoundingClientRect().width}));
  checks(sizes.scrollWidth<=sizes.width+2,viewport.name+': horizontal overflow '+JSON.stringify(sizes));
@@ -49,6 +62,7 @@ for(const viewport of [{width:1440,height:900,name:'desktop'},{width:390,height:
   const dims=await page.evaluate(()=>({width:document.documentElement.clientWidth,scrollWidth:document.documentElement.scrollWidth}));
   checks(dims.scrollWidth<=dims.width+2,viewport.name+' '+target.key+' horizontal overflow: '+JSON.stringify(dims));
   checks(await page.locator('#site-menu a.nav-panel__link').count()===7,viewport.name+' '+target.key+' seven-item menu missing');
+  if(viewport.name==='mobile')await auditAccessibility(page,target.key+' mobile');
   if(target.key==='capabilities'){
    checks(await page.locator('.cap-service').count()===6,viewport.name+' capability category count incorrect');
    checks(await page.locator('.cap-sector').count()===7,viewport.name+' prior sector evidence count incorrect');
@@ -68,6 +82,7 @@ for(const id of ['mernorahflow','securegate','roxzy']){
  const resp=await page.goto(base+'/case-studies/'+id+'.html',{waitUntil:'domcontentloaded'});
  checks(resp?.status()===200,id+': missing case study');
  checks(await page.locator('h1').count()===1,id+': invalid heading count');
+ if(id==='mernorahflow')await auditAccessibility(page,id+' engineering case study');
  checks(await page.locator('.case-flow__step').count()>2,id+': architecture diagram incomplete');
  checks(await page.locator('.case-decision-grid article').count()===3,id+': missing technical trade-offs');
  const sizes=await page.evaluate(()=>({width:document.documentElement.clientWidth,scrollWidth:document.documentElement.scrollWidth}));
@@ -80,6 +95,8 @@ for(const id of ['mernorahflow','securegate','roxzy']){
  const page=await browser.newPage({viewport:{width:390,height:844}});
  const r=await page.goto(base+'/projects.html',{waitUntil:'domcontentloaded'});
  checks(r?.status()===200,'projects page missing');
+ checks(await page.locator('#engineering-review').count()===1,'engineering evidence matrix missing');
+ await auditAccessibility(page,'projects mobile');
  checks(await page.locator('.projects > article.project').count()===12,'projects catalog should contain twelve cards');
  checks((await page.locator('#result-count').textContent())?.includes('12 projects'),'initial project count not updated');
  for(const id of ['mernorah-intelligence','mernorah-experience','seak-portfolio']){
@@ -89,7 +106,13 @@ for(const id of ['mernorahflow','securegate','roxzy']){
  checks(arrows===0,'decorative arrows remain in interactive controls');
  const filter=page.locator('[data-filter="security"]');await filter.click();
  checks(await page.locator('[data-category]:visible').count()>=1,'security filter leaves no projects');
- await page.goto(base+'/contact.html',{waitUntil:'domcontentloaded'});
+ await page.goto(base+'/experience.html#role-fit',{waitUntil:'domcontentloaded'});
+ checks(await page.locator('#role-fit').count()===1,'role fit entry point missing');
+ checks(await page.locator('a[href*="linkedin.com/in/"]').count()>=1,'recruiter social link missing');
+ await page.goto(base+'/contact.html#project-brief',{waitUntil:'domcontentloaded'});
+ checks(await page.locator('#project-brief').count()===1,'client project brief entry point missing');
+ checks(await page.locator('.client-process__steps article').count()===3,'client scoping steps missing');
+ await auditAccessibility(page,'contact mobile');
  checks(await page.locator('form#contact-form').count()===1,'contact form missing');
  checks(await page.locator('#contact-email').getAttribute('type')==='email','email input is not validated');
  const validity=await page.locator('#contact-form').evaluate(f=>f.checkValidity());
@@ -102,4 +125,4 @@ for(const id of ['mernorahflow','securegate','roxzy']){
 await browser.close();
 console.log('BROWSER AUDIT:',JSON.stringify(report,null,2));
 if(errors.length){console.error('BROWSER AUDIT FAILURES:\n'+errors.join('\n'));process.exit(1)}
-console.log('PASS — browser smoke suite across desktop, mobile, small mobile, eleven pages, industries, capability groups, roadmap, twelve projects, navigation, case studies, filtering and form validation.');
+console.log('PASS — browser smoke suite across desktop, mobile, all eleven pages, client/recruiter/engineering paths, critical accessibility checks, case studies, filtering and contact validation.');
