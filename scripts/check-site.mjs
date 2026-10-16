@@ -18,6 +18,7 @@ for(const file of pages){
  const ids=[...html.matchAll(/\bid=["']([^"']+)["']/g)].map(m=>m[1]);
  if(ids.length!==new Set(ids).size)throw Error('Duplicate IDs: '+file);
  for(const tag of html.matchAll(/<img\b[^>]*>/gi))if(!/\balt=["']/.test(tag[0]))throw Error('Image missing alt: '+file);
+ for(const control of html.matchAll(/<(?:a|button)\b[^>]*>[\s\S]*?<\/(?:a|button)>/gi))if(/[↗↓←➤⟶]/.test(control[0]))throw Error('Unnecessary directional glyph in a link or button: '+file);
  for(const link of html.matchAll(/<a\b[^>]*target=["']_blank["'][^>]*>/gi))if(!/\brel=["'][^"']*noopener/.test(link[0]))throw Error('Unsafe target=_blank: '+file);
  for(const m of html.matchAll(/(?:href|src|action)=["']([^"']+)["']/g)){
   const url=m[1];if(!url||/^(https?:|mailto:|tel:|data:)/.test(url))continue;
@@ -32,7 +33,7 @@ for(const file of pages){
 for(const page of pages){
  const html=fs.readFileSync(page,'utf8');
  if(!html.includes('tabindex="-1"'))throw Error('Skip target cannot receive focus: '+page);
- if(!html.includes('/assets/editorial.css?v=20261016quality1')&&!html.includes('/assets/editorial.css?v=20261016proof1'))throw Error('CSS version was not refreshed: '+page);
+ if(!html.includes('/assets/editorial.css?v=20261016projects2'))throw Error('CSS version was not refreshed: '+page);
  if(!html.includes('/assets/editorial.js?v=20261016quality1')&&!html.includes('/assets/editorial.js?v=20261016proof1'))throw Error('JS version was not refreshed: '+page);
  if(!page.startsWith('case-studies/')&&page!=='resume.html'){
   const expected=page==='index.html'?'/':'/'+page;
@@ -41,12 +42,15 @@ for(const page of pages){
 }
 const home=fs.readFileSync('index.html','utf8');
 for(const must of ['id="slide-heading"','id="next-slide"','id="progress-fill"','class="stage__ring"','class="stage__portrait"','/assets/seak-portrait-clean.webp','/assets/editorial.css','/assets/editorial.js'])if(!home.includes(must))throw Error('Reference design element missing: '+must);
-if(!home.includes('DOWNLOAD CV ↓')||!home.includes('CONTACT ↗'))throw Error('Homepage recruiter quicklinks missing');
+if(!home.includes('DOWNLOAD CV')||!home.includes('CONTACT'))throw Error('Homepage recruiter quicklinks missing');
+if(!home.includes('>NEXT</span>')||!home.includes('>VIEW</span>'))throw Error('Slide controls must communicate their action without arrows');
 if(!home.includes('class="hero-viewport"')||!home.includes('id="engineering-proof"'))throw Error('Hero viewport or engineering evidence missing');
 if(!home.includes('/assets/credibility.css?v=20261016proof1'))throw Error('Proof stylesheet missing on home');
 const projects=fs.readFileSync('projects.html','utf8');
-for(const id of ['mernorahflow','securegate','roxzy','farmart','retailcore','hopehills','netpulse','innovartus','mernorah-web'])if(!projects.includes('id="'+id+'"')||!projects.includes('id="'+id+'-case"'))throw Error('Project omitted: '+id);
+for(const id of ['mernorahflow','securegate','roxzy','farmart','retailcore','hopehills','netpulse','innovartus','mernorah-web','mernorah-intelligence','mernorah-experience','seak-portfolio'])if(!projects.includes('id="'+id+'"')||!projects.includes('id="'+id+'-case"'))throw Error('Project omitted: '+id);
 if(!projects.includes('src="/assets/v3-flow-demo.webp"'))throw Error('Local demonstration evidence missing');
+if(!projects.includes('12 projects shown'))throw Error('Initial project count is incorrect');
+if((projects.match(/<article class="project[^\"]*" id="/g)||[]).length!==12)throw Error('Exactly twelve project cards expected');
 for(const id of ['mernorahflow','securegate','roxzy']){
  const link='/case-studies/'+id+'.html';
  const page=fs.readFileSync('case-studies/'+id+'.html','utf8');
@@ -65,4 +69,4 @@ for(const expected of ['function closeMenu(restoreFocus=true)','focusables=[togg
 }
 const css=fs.readFileSync('assets/editorial.css','utf8');
 for(const key of ['--orange:#ff6d26','grid-template','prefers-reduced-motion','max-width:650px'])if(!css.includes(key))throw Error('Design or accessibility regression: '+key);
-console.log('PASS — nine pages, nine projects, three flagship technical case studies, clear evidence labeling, navigation, links, assets, JS syntax, accessibility basics, and approved CV unchanged.');
+console.log('PASS — nine pages, twelve projects, three flagship technical case studies, streamlined links/buttons, navigation, assets, JS syntax, accessibility basics, and approved CV unchanged.');
