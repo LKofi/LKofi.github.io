@@ -28,15 +28,31 @@ for(const file of pages){
   if(fragment){const other=fs.readFileSync(pathWithoutQuery,'utf8');if(!other.includes('id="'+decodeURIComponent(fragment)+'"'))throw Error('Broken fragment: '+file+' => '+url)}
  }
 }
+for(const page of pages){
+ const html=fs.readFileSync(page,'utf8');
+ if(!html.includes('tabindex="-1"'))throw Error('Skip target cannot receive focus: '+page);
+ if(!html.includes('/assets/editorial.css?v=20261016quality1'))throw Error('CSS version was not refreshed: '+page);
+ if(!html.includes('/assets/editorial.js?v=20261016quality1'))throw Error('JS version was not refreshed: '+page);
+ if(page!=='resume.html'){
+  const expected=page==='index.html'?'/':'/'+page;
+  if(!html.includes('aria-current="page" href="'+expected+'"'))throw Error('Current page not identified: '+page);
+ }
+}
 const home=fs.readFileSync('index.html','utf8');
 for(const must of ['id="slide-heading"','id="next-slide"','id="progress-fill"','class="stage__ring"','class="stage__portrait"','/assets/seak-portrait-clean.webp','/assets/editorial.css','/assets/editorial.js'])if(!home.includes(must))throw Error('Reference design element missing: '+must);
+if(!home.includes('DOWNLOAD CV ↓')||!home.includes('CONTACT ↗'))throw Error('Homepage recruiter quicklinks missing');
 const projects=fs.readFileSync('projects.html','utf8');
 for(const id of ['mernorahflow','securegate','roxzy','farmart','retailcore','hopehills','netpulse','innovartus','mernorah-web'])if(!projects.includes('id="'+id+'"')||!projects.includes('id="'+id+'-case"'))throw Error('Project omitted: '+id);
+if(!projects.includes('src="/assets/v3-flow-demo.webp"'))throw Error('Local demonstration evidence missing');
 const contact=fs.readFileSync('contact.html','utf8');
 if(!contact.includes('action="https://formsubmit.co/ajax/')||!contact.includes('mailto:sukahemmanuelkofi@gmail.com'))throw Error('Contact form or fallback missing');
 const cv=fs.readFileSync('assets/Sukkah_Emmanuel_CV_2026.pdf');
 const hash=createHash('sha1').update(Buffer.from('blob '+cv.length+'\0')).update(cv).digest('hex');
 if(hash!=='bee9ac49c2821b797e6beae151a8f925e066924c')throw Error('Approved CV changed. Halt deployment.');
+const js=fs.readFileSync('assets/editorial.js','utf8');
+for(const expected of ['function closeMenu(restoreFocus=true)','focusables=[toggle,','document.createElement("a")']){
+ if(!js.includes(expected))throw Error('Menu keyboard or contact fallback regression: '+expected);
+}
 const css=fs.readFileSync('assets/editorial.css','utf8');
 for(const key of ['--orange:#ff6d26','grid-template','prefers-reduced-motion','max-width:650px'])if(!css.includes(key))throw Error('Design or accessibility regression: '+key);
 console.log('PASS — six pages, nine project case studies, navigation, assets, JS syntax, accessibility basics, and unchanged approved CV.');
