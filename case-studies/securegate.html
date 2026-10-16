@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#202329">
+<meta name="color-scheme" content="dark">
+<meta name="author" content="Sukkah Emmanuel Kofi Ariel">
+<meta name="description" content="Reusable authentication and role-based access components for protected backend routes.">
+<link rel="canonical" href="https://lkofi.github.io/case-studies/securegate.html">
+<meta property="og:type" content="article"><meta property="og:site_name" content="SEAK — Software Engineering">
+<meta property="og:title" content="SecureGate — Engineering Case Study | Sukkah Emmanuel">
+<meta property="og:description" content="Reusable authentication and role-based access components for protected backend routes.">
+<meta property="og:url" content="https://lkofi.github.io/case-studies/securegate.html">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/assets/mark.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/editorial.css?v=20261016proof1">
+<link rel="stylesheet" href="/assets/credibility.css?v=20261016proof1">
+<title>SecureGate — Engineering Case Study | Sukkah Emmanuel</title>
+</head>
+<body class="editorial case-study-page">
+<a class="skip" href="#main">Skip to case study</a><div class="site-bg-noise" aria-hidden="true"></div>
+<header class="case-topbar inner-shell"><a class="brand" href="/" aria-label="Sukkah Emmanuel portfolio homepage">SEAK<span>.</span></a><a class="case-back" href="/projects.html">← PROJECTS</a><a class="case-top-contact" href="/contact.html">LET'S TALK ↗</a></header>
+<main id="main" tabindex="-1" class="inner-shell case-page">
+  <div class="case-masthead">
+    <p class="overline">02 / BACKEND &amp; APPLICATION SECURITY</p><p class="case-index">ENGINEERING CASE STUDY / 2026</p>
+    <h1>SecureGate</h1>
+    <p class="case-deck">Reusable authentication and role-based access components for protected backend routes.</p>
+    <div class="case-tags"><span>JavaScript / TypeScript</span><span>Node.js</span><span>Express</span><span>JWT</span><span>RBAC</span><span>Tests</span></div>
+  </div>
+  <div class="case-lead-grid">
+    <section aria-labelledby="challenge"><p class="overline">THE PROBLEM</p><h2 id="challenge">What needed solving.</h2><p>Authentication proves who a requester claims to be. It does not automatically grant permission to access every record or endpoint. SecureGate addresses that boundary through reusable middleware and predictable denials.</p></section>
+    <section aria-labelledby="role"><p class="overline">MY CONTRIBUTION</p><h2 id="role">What I worked on.</h2><ul class="case-bullets"><li>Built reusable token-verification and role-based route-protection middleware for Node.js APIs.</li><li>Separated identity validation from the authorization decision for protected resources.</li><li>Tested rejection scenarios including invalid credentials and insufficient privileges.</li></ul></section>
+  </div>
+  <section class="case-architecture" aria-labelledby="architecture">
+    <p class="overline">SYSTEM DESIGN</p><h2 id="architecture">How the system fits together.</h2>
+    <div class="case-flow" role="img" aria-label="Client request to Token verification to Role / permission check to Authorized resource"><div class="case-flow__step"><span>01</span><strong>Client request</strong></div><div class="case-flow__step"><span>02</span><strong>Token verification</strong></div><div class="case-flow__step"><span>03</span><strong>Role / permission check</strong></div><div class="case-flow__step"><span>04</span><strong>Authorized resource</strong></div></div>
+    <p class="case-flow-caption">Architecture illustration — simplified explanation, not a production infrastructure screenshot.</p>
+    <p>A protected request first passes through identity validation. The route then evaluates permitted roles or access rights before protected code runs. Invalid tokens and insufficient permissions return denials rather than continuing to the resource.</p>
+  </section>
+  <section class="case-decisions" aria-labelledby="decisions"><p class="overline">ENGINEERING JUDGMENT</p><h2 id="decisions">Decisions and trade-offs.</h2><div class="case-decision-grid"><article><span class="case-decision-num">01</span><h3>Deny by default</h3><p>Missing, invalid or insufficient authorization must not lead to a protected operation.</p></article><article><span class="case-decision-num">02</span><h3>Separation of concerns</h3><p>Authentication middleware verifies identity; authorization middleware handles access decisions.</p></article><article><span class="case-decision-num">03</span><h3>Test the failure path</h3><p>Negative tests matter as much as successful requests, especially at permission boundaries.</p></article></div></section>
+  <section aria-labelledby="case-evidence"><p class="overline">EVIDENCE AND BOUNDARIES</p><h2 id="case-evidence">What you can verify here.</h2><div class="case-evidence-note"><span class="case-evidence-icon" aria-hidden="true">↗</span><div><strong>Engineering evidence</strong><p>This case study explains the control flow and failure-path tests. Its architecture diagram is conceptual; it is not a live penetration-test report or a public repository.</p></div></div><p class="case-boundary">A reusable RBAC middleware design is not, by itself, proof of a complete audited security program. There is no published external audit, vulnerability report or security certification for this project here.</p></section>
+  <section class="case-outcome" aria-labelledby="outcome"><p class="overline">OUTCOME</p><h2 id="outcome">What the work delivered.</h2><p>Reusable protective middleware and documented access-denial behavior, with a clearer boundary between verified identity and permitted action. Test coverage percentages are not claimed.</p></section>
+  <section class="case-next" aria-labelledby="case-next"><p class="overline">NEXT</p><h2 id="case-next">Interested in the technical decisions?</h2><p>I can discuss my implementation approach, constraints and lessons learned in an engineering interview, while respecting private project information.</p><nav class="case-nav" aria-label="Case study navigation"><a href="/projects.html">← All projects</a><a href="/assets/Sukkah_Emmanuel_CV_2026.pdf" download>Download CV ↓</a><a href="/contact.html">Discuss a role ↗</a></nav></section>
+</main>
+<footer class="footer inner-shell"><span>© <span data-year>2026</span> SUKKAH EMMANUEL / SOFTWARE ENGINEER</span><div class="footer__links"><a href="/projects.html">ALL PROJECTS</a><a href="https://github.com/LKofi" target="_blank" rel="noopener noreferrer">GITHUB ↗</a><a href="mailto:sukahemmanuelkofi@gmail.com">EMAIL ↗</a></div></footer>
+<script src="/assets/editorial.js?v=20261016proof1" defer></script>
+</body></html>
