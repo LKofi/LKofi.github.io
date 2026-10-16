@@ -1,0 +1,76 @@
+/* Engineering capabilities and industries — consistent with SEAK editorial identity */
+.capabilities-page .inner-content{padding-top:clamp(46px,6vw,84px)}
+.cap-intro{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(28px,6vw,95px);align-items:end;margin-bottom:clamp(70px,9vw,125px)}
+.cap-intro .section-title{margin:12px 0 0}
+.cap-intro .lead{margin:0;max-width:570px}
+.cap-section{padding:clamp(45px,6vw,90px) 0;border-top:1px solid #4c4f58}
+.cap-section-heading{max-width:740px;margin:0 0 32px}
+.cap-section-heading h2{font-size:clamp(32px,4.5vw,63px);letter-spacing:-.065em;line-height:1.08;margin:14px 0}
+.cap-section-heading p:not(.overline){font-size:clamp(15px,1.35vw,18px);line-height:1.7;color:#c3c4cc;margin:0}
+.cap-service-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.cap-service{background:linear-gradient(135deg,#292d35,#202329);border:1px solid #4a4e58;padding:clamp(24px,3.2vw,44px);min-width:0}
+.cap-service h3{font-size:clamp(23px,2.8vw,34px);letter-spacing:-.055em;line-height:1.12;margin:27px 0 14px}
+.cap-service p:not(.overline){font-size:15px;color:#c5c6cc;line-height:1.75;margin:0 0 21px}
+.cap-service ul{margin:0;padding:18px 0 0 20px;border-top:1px solid #50545e}
+.cap-service li{font-size:14px;color:#d6d8de;line-height:1.65;padding:4px 0 4px 2px}
+.cap-service li::marker{color:var(--orange)}
+.cap-compact-grid,.cap-outcome-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px}
+.cap-compact,.cap-outcome-grid article{border:1px solid #4c515d;background:#262a32;padding:clamp(22px,2.7vw,34px)}
+.cap-compact h3,.cap-outcome-grid h3{font-size:clamp(20px,2.2vw,27px);line-height:1.2;letter-spacing:-.04em;margin:0 0 14px}
+.cap-compact p,.cap-outcome-grid p{font-size:14px;line-height:1.75;color:#c5c7cf;margin:0}
+.cap-outcome-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+.cap-sector-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.cap-sector{display:flex;gap:20px;padding:25px 24px;background:#272b33;border:1px solid #494d58;min-width:0}
+.cap-number{font-size:12px;flex-shrink:0;letter-spacing:.14em;color:var(--orange);line-height:2.1}
+.cap-sector h3{font-size:21px;letter-spacing:-.045em;line-height:1.22;margin:0 0 10px}
+.cap-sector p{font-size:14px;line-height:1.7;color:#c2c4cd;margin:0 0 17px}
+.cap-sector a{font-size:12px;color:#ffba90;text-decoration:underline;text-underline-offset:4px;line-height:1.7}
+.cap-sector a:hover{color:#fff}
+.cap-target-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.cap-target{display:flex;align-items:center;min-height:87px;background:#272a32;border:1px solid #4a4f57;padding:20px;font-size:14px;line-height:1.5;color:#e2e2e5}
+.cap-contact{margin:35px 0 40px;padding:clamp(28px,5vw,65px);border:1px solid #5c606a;background:linear-gradient(120deg,#30333c,#1e2229)}
+.cap-contact h2{font-size:clamp(32px,4.7vw,62px);letter-spacing:-.062em;line-height:1.08;margin:13px 0 17px;max-width:790px}
+.cap-contact p:not(.overline){max-width:740px;line-height:1.75;color:#c8cad0;margin:0}
+.cap-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+.cap-actions a{display:inline-flex;align-items:center;min-height:45px;padding:13px 20px;border:1px solid #666973;font-size:13px;font-weight:650}
+.cap-actions a:first-child{background:var(--orange);color:#17191c;border-color:var(--orange)}
+.cap-actions a:hover{border-color:#fff;color:#fff}
+.cap-actions a:first-child:hover{background:#fda16a;color:#111}
+.cap-roadmap-note{margin-top:25px;padding:23px 27px;border:1px solid #68604e;background:#312c25;max-width:910px}
+.cap-roadmap-note p{margin:0;font-size:14px;color:#e2d7ce;line-height:1.7}
+.cap-roadmap-note a{color:#ffc7a4;text-decoration:underline;text-underline-offset:4px}
+.cap-roadmap-note a:hover{color:#fff}
+.home-capabilities{border-top:1px solid #4d515c;padding:clamp(55px,7vw,95px) 0 clamp(65px,8vw,125px)}
+.home-capabilities__top{display:flex;align-items:end;justify-content:space-between;gap:28px;margin-bottom:26px}
+.home-capabilities__top h2{font-size:clamp(31px,4.4vw,64px);letter-spacing:-.068em;line-height:1.08;margin:12px 0 0}
+.home-capabilities__top em{font-style:normal;color:var(--orange)}
+.home-capabilities__top p{max-width:370px;line-height:1.7;color:#c4c6ce;margin:0}
+.home-capabilities__grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:13px}
+.home-capabilities__item{padding:25px 23px;background:#282c34;border:1px solid #494f59;min-width:0}
+.home-capabilities__item small{display:block;font-size:11px;color:var(--orange);letter-spacing:.14em;margin-bottom:26px}
+.home-capabilities__item h3{font-size:clamp(19px,2vw,27px);letter-spacing:-.05em;line-height:1.2;margin:0 0 13px}
+.home-capabilities__item p{color:#c4c5cc;font-size:13px;line-height:1.7;margin:0}
+.home-capabilities__links{margin-top:24px;display:flex;align-items:center;justify-content:space-between;gap:15px;flex-wrap:wrap}
+.home-capabilities__links a{display:inline-flex;align-items:center;min-height:44px;border-bottom:1px solid #a36a4e;color:#ffe2ce;font-weight:650;font-size:13px}
+.home-capabilities__links a:hover{border-color:#fff;color:#fff}
+.roadmap-header{max-width:870px;margin:0 0 52px}
+.roadmap-header h1{font-size:clamp(39px,7vw,94px);letter-spacing:-.075em;line-height:1.02;margin:15px 0 20px}
+.roadmap-header p:not(.overline){font-size:clamp(16px,1.65vw,21px);color:#c7c8d0;line-height:1.7}
+.roadmap-panel{padding:clamp(25px,4.3vw,56px);background:#272b33;border:1px solid #515660;margin:0 0 18px}
+.roadmap-panel__head{display:flex;justify-content:space-between;gap:26px;margin-bottom:26px}
+.roadmap-panel h2{font-size:clamp(29px,3.5vw,47px);line-height:1.1;letter-spacing:-.055em;margin:12px 0}
+.roadmap-panel p{color:#c8c9d0;line-height:1.7}
+.roadmap-status{font-size:11px;letter-spacing:.11em;text-transform:uppercase;white-space:nowrap;color:#ffba90;border:1px solid #9e664f;align-self:start;padding:10px}
+.roadmap-panel__fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+.roadmap-panel__fields>div{border-top:1px solid #50545d;padding-top:17px}
+.roadmap-panel__fields h3{font-size:13px;text-transform:uppercase;letter-spacing:.09em;color:#ffa978;margin:0 0 12px}
+.roadmap-panel__fields p{font-size:14px;line-height:1.7;margin:0}
+.roadmap-small{padding:23px 26px;background:#282c34;border:1px solid #50545f}
+.roadmap-small h3{font-size:21px;margin:0 0 12px;letter-spacing:-.035em}
+.roadmap-small p{font-size:14px;color:#c6c8d0;line-height:1.7;margin:0}
+.roadmap-small-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px}
+.roadmap-caption{font-size:14px;color:#c4c5cb;line-height:1.7;margin:18px 0 25px}
+@media(max-width:1000px){.cap-target-grid,.home-capabilities__grid{grid-template-columns:repeat(2,minmax(0,1fr))}.cap-outcome-grid{grid-template-columns:1fr 1fr}.cap-outcome-grid article:last-child{grid-column:1/-1}.roadmap-small-grid{grid-template-columns:1fr 1fr}.roadmap-small-grid article:last-child{grid-column:1/-1}}
+@media(max-width:650px){.capabilities-page .inner-content{padding-top:42px}.cap-intro,.cap-service-grid,.cap-compact-grid,.cap-sector-grid,.cap-outcome-grid,.roadmap-panel__fields,.roadmap-small-grid{grid-template-columns:1fr}.cap-outcome-grid article:last-child,.roadmap-small-grid article:last-child{grid-column:auto}.cap-intro{gap:17px;margin-bottom:56px}.cap-section{padding:46px 0}.cap-section-heading{margin-bottom:23px}.cap-service{padding:25px 22px}.cap-sector{padding:23px 20px}.cap-target-grid,.home-capabilities__grid{grid-template-columns:1fr 1fr}.cap-target{min-height:95px;padding:16px;font-size:13px}.home-capabilities__top{display:block}.home-capabilities__top p{margin-top:19px}.home-capabilities__item{padding:21px 18px}.home-capabilities__item small{margin-bottom:17px}.home-capabilities__item h3{font-size:19px}.roadmap-panel__head{display:block}.roadmap-status{display:inline-block;margin-top:10px}.roadmap-panel{padding:25px 22px}.roadmap-small{padding:22px}.cap-actions{flex-direction:column}.cap-actions a{justify-content:center}.cap-contact{margin:10px 0 25px}}
+@media(max-width:390px){.cap-target-grid,.home-capabilities__grid{grid-template-columns:1fr}.home-capabilities__item{min-height:0}}
+@media(prefers-reduced-motion:reduce){.cap-actions a{transition:none}}
