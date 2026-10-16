@@ -2,8 +2,8 @@ import fs from 'node:fs';
 import path from 'node:path';
 import {spawnSync} from 'node:child_process';
 import {createHash} from 'node:crypto';
-const pages=['index.html','projects.html','about.html','experience.html','contact.html','resume.html','case-studies/mernorahflow.html','case-studies/securegate.html','case-studies/roxzy.html'];
-const assets=['assets/editorial.css','assets/credibility.css','assets/editorial.js','assets/seak-portrait-clean.webp','assets/v3-flow-demo.webp','assets/Sukkah_Emmanuel_CV_2026.pdf','assets/mark.svg'];
+const pages=['index.html','projects.html','about.html','experience.html','contact.html','resume.html','capabilities.html','engineering-roadmap.html','case-studies/mernorahflow.html','case-studies/securegate.html','case-studies/roxzy.html'];
+const assets=['assets/editorial.css','assets/credibility.css','assets/capabilities.css','assets/editorial.js','assets/seak-portrait-clean.webp','assets/v3-flow-demo.webp','assets/Sukkah_Emmanuel_CV_2026.pdf','assets/mark.svg'];
 for(const file of [...pages,...assets])if(!fs.existsSync(file))throw Error('Required file missing: '+file);
 for(const file of ['assets/editorial.js']){const p=spawnSync(process.execPath,['--check',file],{encoding:'utf8'});if(p.status!==0)throw Error('JavaScript syntax error '+file+'\n'+p.stderr);}
 for(const file of pages){
@@ -33,9 +33,9 @@ for(const file of pages){
 for(const page of pages){
  const html=fs.readFileSync(page,'utf8');
  if(!html.includes('tabindex="-1"'))throw Error('Skip target cannot receive focus: '+page);
- if(!html.includes('/assets/editorial.css?v=20261016projects2'))throw Error('CSS version was not refreshed: '+page);
+ if(!html.includes('/assets/editorial.css?v=20261016projects2')&&!html.includes('/assets/editorial.css?v=20261016caps1'))throw Error('CSS version was not refreshed: '+page);
  if(!html.includes('/assets/editorial.js?v=20261016quality1')&&!html.includes('/assets/editorial.js?v=20261016proof1'))throw Error('JS version was not refreshed: '+page);
- if(!page.startsWith('case-studies/')&&page!=='resume.html'){
+ if(!page.startsWith('case-studies/')&&!['resume.html','engineering-roadmap.html'].includes(page)){
   const expected=page==='index.html'?'/':'/'+page;
   if(!html.includes('aria-current="page" href="'+expected+'"'))throw Error('Current page not identified: '+page);
  }
@@ -46,6 +46,8 @@ if(!home.includes('DOWNLOAD CV')||!home.includes('CONTACT'))throw Error('Homepag
 if(!home.includes('>NEXT</span>')||!home.includes('>VIEW</span>'))throw Error('Slide controls must communicate their action without arrows');
 if(!home.includes('class="hero-viewport"')||!home.includes('id="engineering-proof"'))throw Error('Hero viewport or engineering evidence missing');
 if(!home.includes('/assets/credibility.css?v=20261016proof1'))throw Error('Proof stylesheet missing on home');
+if(!home.includes('id="home-capabilities-title"')||!home.includes('href="/capabilities.html"'))throw Error('Homepage capabilities preview missing');
+if(!home.includes('href="/engineering-roadmap.html"'))throw Error('Roadmap link absent from homepage');
 const projects=fs.readFileSync('projects.html','utf8');
 for(const id of ['mernorahflow','securegate','roxzy','farmart','retailcore','hopehills','netpulse','innovartus','mernorah-web','mernorah-intelligence','mernorah-experience','seak-portfolio'])if(!projects.includes('id="'+id+'"')||!projects.includes('id="'+id+'-case"'))throw Error('Project omitted: '+id);
 if(!projects.includes('src="/assets/v3-flow-demo.webp"'))throw Error('Local demonstration evidence missing');
@@ -58,6 +60,19 @@ for(const id of ['mernorahflow','securegate','roxzy']){
  for(const section of ['id="challenge"','id="role"','id="architecture"','id="decisions"','id="case-evidence"','id="outcome"'])if(!page.includes(section))throw Error('Technical case study incomplete: '+id+'/'+section);
  if(!page.includes('Architecture illustration'))throw Error('Diagram must be labeled: '+id);
 }
+const capabilities=fs.readFileSync('capabilities.html','utf8');
+const roadmap=fs.readFileSync('engineering-roadmap.html','utf8');
+for(const category of ['id="expertise"','id="additional-services"','id="industry-experience"','id="industries-to-serve"','id="future-engineering"'])if(!capabilities.includes(category))throw Error('Missing distinct capabilities category: '+category);
+if(!capabilities.includes('id="industry-experience"')||!capabilities.includes('id="industries-to-serve"'))throw Error('Past sectors and possible industries must remain distinguished');
+if(!capabilities.includes('href="/engineering-roadmap.html"'))throw Error('Future system roadmap is not linked from capabilities');
+if(!capabilities.includes('src="/assets/seak-portrait-clean.webp"')&&!capabilities.includes('class="cap-service-grid"'))throw Error('Capabilities page content missing');
+for(const marker of ['Planned / Not Delivered','Ledger','Security Monitoring','Enterprise AI','Multi-Tenant SaaS'])if(!roadmap.includes(marker))throw Error('Roadmap status or target project missing: '+marker);
+const primaryPages=['index.html','projects.html','about.html','experience.html','contact.html','resume.html','capabilities.html','engineering-roadmap.html'];
+for(const page of primaryPages){
+ const html=fs.readFileSync(page,'utf8');
+ if((html.match(/class="nav-panel__link"/g)||[]).length!==7)throw Error('Seven consistent navigation items expected: '+page);
+ if(!html.includes('href="/capabilities.html"'))throw Error('Capabilities navigation missing: '+page);
+}
 const contact=fs.readFileSync('contact.html','utf8');
 if(!contact.includes('action="https://formsubmit.co/ajax/')||!contact.includes('mailto:sukahemmanuelkofi@gmail.com'))throw Error('Contact form or fallback missing');
 const cv=fs.readFileSync('assets/Sukkah_Emmanuel_CV_2026.pdf');
@@ -69,4 +84,4 @@ for(const expected of ['function closeMenu(restoreFocus=true)','focusables=[togg
 }
 const css=fs.readFileSync('assets/editorial.css','utf8');
 for(const key of ['--orange:#ff6d26','grid-template','prefers-reduced-motion','max-width:650px'])if(!css.includes(key))throw Error('Design or accessibility regression: '+key);
-console.log('PASS — nine pages, twelve projects, three flagship technical case studies, streamlined links/buttons, navigation, assets, JS syntax, accessibility basics, and approved CV unchanged.');
+console.log('PASS — eleven pages, twelve projects, six capability categories, industries distinguished by evidence, seven planned roadmap builds, three technical case studies, navigation, links, accessibility basics and approved CV unchanged.');
