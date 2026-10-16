@@ -3,7 +3,7 @@ import path from 'node:path';
 import {spawnSync} from 'node:child_process';
 import {createHash} from 'node:crypto';
 const pages=['index.html','projects.html','about.html','experience.html','contact.html','resume.html','capabilities.html','engineering-roadmap.html','case-studies/mernorahflow.html','case-studies/securegate.html','case-studies/roxzy.html'];
-const assets=['assets/editorial.css','assets/credibility.css','assets/capabilities.css','assets/editorial.js','assets/seak-portrait-clean.webp','assets/v3-flow-demo.webp','assets/Sukkah_Emmanuel_CV_2026.pdf','assets/mark.svg'];
+const assets=['assets/editorial.css','assets/credibility.css','assets/capabilities.css','assets/trust.css','assets/editorial.js','assets/seak-portrait-clean.webp','assets/v3-flow-demo.webp','assets/Sukkah_Emmanuel_CV_2026.pdf','assets/mark.svg'];
 for(const file of [...pages,...assets])if(!fs.existsSync(file))throw Error('Required file missing: '+file);
 for(const file of ['assets/editorial.js']){const p=spawnSync(process.execPath,['--check',file],{encoding:'utf8'});if(p.status!==0)throw Error('JavaScript syntax error '+file+'\n'+p.stderr);}
 for(const file of pages){
@@ -13,6 +13,7 @@ for(const file of pages){
  if(!file.startsWith('case-studies/')&&(!html.includes('id="menu-button"')||!html.includes('id="site-menu"')))throw Error('Navigation missing: '+file);
  if(file.startsWith('case-studies/')&&!html.includes('class="case-nav"'))throw Error('Case navigation missing: '+file);
  if(!html.includes('href="/projects.html"')||!html.includes('href="/contact.html"'))throw Error('Recruiter navigation missing: '+file);
+ if(!html.includes('href="https://www.linkedin.com/in/sukkah-emmanuel-kofi-4550b63a1/"'))throw Error('LinkedIn profile is not linked: '+file);
  if((html.match(/<h1\b/gi)||[]).length!==1)throw Error('Expected exactly one H1: '+file);
  if(/\s+on(?:click|load|error|mouseover|focus)\s*=/i.test(html))throw Error('Unsafe inline event attribute: '+file);
  const ids=[...html.matchAll(/\bid=["']([^"']+)["']/g)].map(m=>m[1]);
@@ -33,7 +34,7 @@ for(const file of pages){
 for(const page of pages){
  const html=fs.readFileSync(page,'utf8');
  if(!html.includes('tabindex="-1"'))throw Error('Skip target cannot receive focus: '+page);
- if(!html.includes('/assets/editorial.css?v=20261016projects2')&&!html.includes('/assets/editorial.css?v=20261016caps1'))throw Error('CSS version was not refreshed: '+page);
+ if(!html.includes('/assets/editorial.css?v=20261016trust2'))throw Error('CSS version was not refreshed: '+page);
  if(!html.includes('/assets/editorial.js?v=20261016quality1')&&!html.includes('/assets/editorial.js?v=20261016proof1'))throw Error('JS version was not refreshed: '+page);
  if(!page.startsWith('case-studies/')&&!['resume.html','engineering-roadmap.html'].includes(page)){
   const expected=page==='index.html'?'/':'/'+page;
@@ -47,6 +48,8 @@ if(!home.includes('>NEXT</span>')||!home.includes('>VIEW</span>'))throw Error('S
 if(!home.includes('class="hero-viewport"')||!home.includes('id="engineering-proof"'))throw Error('Hero viewport or engineering evidence missing');
 if(!home.includes('/assets/credibility.css?v=20261016proof1'))throw Error('Proof stylesheet missing on home');
 if(!home.includes('id="home-capabilities-title"')||!home.includes('href="/capabilities.html"'))throw Error('Homepage capabilities preview missing');
+for(const path of ['/experience.html#role-fit','/projects.html#engineering-review','/contact.html#project-brief'])if(!home.includes(path))throw Error('Audience navigation missing: '+path);
+if((home.match(/class="audience__card"/g)||[]).length!==3)throw Error('Three audience paths required');
 if(!home.includes('href="/engineering-roadmap.html"'))throw Error('Roadmap link absent from homepage');
 const projects=fs.readFileSync('projects.html','utf8');
 for(const id of ['mernorahflow','securegate','roxzy','farmart','retailcore','hopehills','netpulse','innovartus','mernorah-web','mernorah-intelligence','mernorah-experience','seak-portfolio'])if(!projects.includes('id="'+id+'"')||!projects.includes('id="'+id+'-case"'))throw Error('Project omitted: '+id);
@@ -73,7 +76,12 @@ for(const page of primaryPages){
  if((html.match(/class="nav-panel__link"/g)||[]).length!==7)throw Error('Seven consistent navigation items expected: '+page);
  if(!html.includes('href="/capabilities.html"'))throw Error('Capabilities navigation missing: '+page);
 }
+const exp=fs.readFileSync('experience.html','utf8');
+if(!exp.includes('id="role-fit"')||!exp.includes('2026 / NETWORK INFRASTRUCTURE'))throw Error('Recruiter evidence or grounded network dates missing');
+if(!projects.includes('id="engineering-review"')||!projects.includes('class="review-matrix"'))throw Error('Engineering evidence matrix missing');
+for(const id of ['mernorahflow','securegate','roxzy'])if(!fs.readFileSync('case-studies/'+id+'.html','utf8').includes('id="technical-review"'))throw Error('Technical validation context missing: '+id);
 const contact=fs.readFileSync('contact.html','utf8');
+if(!contact.includes('id="project-brief"')||!contact.includes('client-process__steps'))throw Error('Client scoping and delivery process missing');
 if(!contact.includes('action="https://formsubmit.co/ajax/')||!contact.includes('mailto:sukahemmanuelkofi@gmail.com'))throw Error('Contact form or fallback missing');
 const cv=fs.readFileSync('assets/Sukkah_Emmanuel_CV_2026.pdf');
 const hash=createHash('sha1').update(Buffer.from('blob '+cv.length+'\0')).update(cv).digest('hex');
@@ -84,4 +92,4 @@ for(const expected of ['function closeMenu(restoreFocus=true)','focusables=[togg
 }
 const css=fs.readFileSync('assets/editorial.css','utf8');
 for(const key of ['--orange:#ff6d26','grid-template','prefers-reduced-motion','max-width:650px'])if(!css.includes(key))throw Error('Design or accessibility regression: '+key);
-console.log('PASS — eleven pages, twelve projects, six capability categories, industries distinguished by evidence, seven planned roadmap builds, three technical case studies, navigation, links, accessibility basics and approved CV unchanged.');
+console.log('PASS — eleven pages, 12 projects, 3 audience pathways, case-study engineering depth, evidence boundaries, seven planned roadmap builds, LinkedIn links, navigation, assets and unchanged approved CV.');
