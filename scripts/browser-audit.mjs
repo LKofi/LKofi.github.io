@@ -15,7 +15,7 @@ async function auditAccessibility(page,label){
  await page.addScriptTag({content:axeSource});
  const findings=await page.evaluate(async()=>{
   const r=await window.axe.run(document,{runOnly:{type:'tag',values:['wcag2a','wcag2aa','wcag21a','wcag21aa']}});
-  return r.violations.map(v=>({id:v.id,impact:v.impact,description:v.description,count:v.nodes.length}));
+  return r.violations.map(v=>({id:v.id,impact:v.impact,description:v.description,count:v.nodes.length,targets:v.nodes.slice(0,5).map(n=>({selector:n.target,summary:(n.failureSummary||'').slice(0,250)}))}));
  });
  report.push({accessibility:label,violations:findings});
  for(const issue of findings.filter(v=>v.impact==='critical'))errors.push(label+' critical accessibility: '+JSON.stringify(issue));
