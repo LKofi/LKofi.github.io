@@ -32,6 +32,7 @@ for(const viewport of [{width:1440,height:900,name:'desktop'},{width:390,height:
  checks(await page.locator('h1').count()===1,viewport.name+': home should have one H1');
  checks(await page.locator('#engineering-proof').count()===1,viewport.name+': engineering proof section missing');
  checks(await page.locator('.audience__card').count()===3,viewport.name+': audience pathways missing');
+ checks(await page.locator('.open-source-proof a[href*="engineering-lab"]').count()>=1,viewport.name+': public engineering lab link missing');
  if(viewport.name!=='small-mobile')await auditAccessibility(page,viewport.name+' homepage');
  checks(await page.locator('a[href="/case-studies/securegate.html"]').count()>0,viewport.name+': case study is not linked');
  const sizes=await page.evaluate(()=>({width:document.documentElement.clientWidth,scrollWidth:document.documentElement.scrollWidth,hero:document.querySelector('.stage')?.getBoundingClientRect().width}));
@@ -96,6 +97,7 @@ for(const id of ['mernorahflow','securegate','roxzy']){
  const r=await page.goto(base+'/projects.html',{waitUntil:'domcontentloaded'});
  checks(r?.status()===200,'projects page missing');
  checks(await page.locator('#engineering-review').count()===1,'engineering evidence matrix missing');
+ checks(await page.locator('.review-matrix a[href*="engineering-lab"]').count()>=1,'public engineering test evidence missing');
  await auditAccessibility(page,'projects mobile');
  checks(await page.locator('.projects > article.project').count()===12,'projects catalog should contain twelve cards');
  checks((await page.locator('#result-count').textContent())?.includes('12 projects'),'initial project count not updated');
@@ -111,6 +113,9 @@ for(const id of ['mernorahflow','securegate','roxzy']){
  checks(await page.locator('a[href*="linkedin.com/in/"]').count()>=1,'recruiter social link missing');
  await page.goto(base+'/contact.html#project-brief',{waitUntil:'domcontentloaded'});
  checks(await page.locator('#project-brief').count()===1,'client project brief entry point missing');
+ checks(await page.locator('.brief-template summary').count()===1,'direct project email brief missing');
+ await page.locator('.brief-template summary').click();
+ checks(await page.locator('.brief-template a[href^="mailto:"]').isVisible(),'direct email brief action missing');
  checks(await page.locator('.client-process__steps article').count()===3,'client scoping steps missing');
  await auditAccessibility(page,'contact mobile');
  checks(await page.locator('form#contact-form').count()===1,'contact form missing');
