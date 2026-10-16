@@ -37,5 +37,20 @@ Source screenshots are not fabricated: project art is clearly marked as conceptu
 ## Additional engineering work
 The catalog also includes MERNORAH INTELLIGENCE (an early enterprise AI authentication/MFA prototype), MERNORAH WEB EXPERIENCE (immersive frontend development work), and this SEAK PORTFOLIO (public source). Development-stage entries are identified as such and do not claim completed production deployments.
 
+## Public reproducible engineering reference
+The `engineering-lab/` directory includes standalone, Node.js-only examples for
+organization-scoped authorization, balanced in-memory journal posting with
+idempotent request keys, and signed webhook validation. Automated negative-path
+tests run via `node --test engineering-lab/lab.test.mjs` and in GitHub Actions.
+This is newly authored demonstrative code, **not** the source of private projects,
+a banking service, or an independently audited library.
+
+`scripts/lighthouse-report.mjs` and `.github/workflows/lighthouse.yml` run
+repeatable local Lighthouse checks (homepage, projects, contact) and publish
+full JSON artifacts. These lab/performance results describe this website and
+reference implementation only; they are not client KPIs. Contact inquiries use
+FormSubmit; its mailbox delivery remains subject to actual activation and
+recipient verification. A separate prefilled `mailto:` brief avoids that relay.
+
 ## Evidence boundaries
 Documented experience and work-in-progress are distinguished from proposed systems. The capabilities page labels industries with related work separately from sectors that are prospective opportunities; the roadmap describes future engineering builds, **not** completed projects or published source. Project details remain bounded by the approved CV and accessible code evidence.
