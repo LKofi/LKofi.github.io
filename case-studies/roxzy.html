@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#202329">
+<meta name="color-scheme" content="dark">
+<meta name="author" content="Sukkah Emmanuel Kofi Ariel">
+<meta name="description" content="A responsive catering website with data-backed enquiries, managed media and protected staff interactions.">
+<link rel="canonical" href="https://lkofi.github.io/case-studies/roxzy.html">
+<meta property="og:type" content="article"><meta property="og:site_name" content="SEAK — Software Engineering">
+<meta property="og:title" content="Roxzy Bakery &amp; Catering — Engineering Case Study | Sukkah Emmanuel">
+<meta property="og:description" content="A responsive catering website with data-backed enquiries, managed media and protected staff interactions.">
+<meta property="og:url" content="https://lkofi.github.io/case-studies/roxzy.html">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/assets/mark.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/editorial.css?v=20261016proof1">
+<link rel="stylesheet" href="/assets/credibility.css?v=20261016proof1">
+<title>Roxzy Bakery &amp; Catering — Engineering Case Study | Sukkah Emmanuel</title>
+</head>
+<body class="editorial case-study-page">
+<a class="skip" href="#main">Skip to case study</a><div class="site-bg-noise" aria-hidden="true"></div>
+<header class="case-topbar inner-shell"><a class="brand" href="/" aria-label="Sukkah Emmanuel portfolio homepage">SEAK<span>.</span></a><a class="case-back" href="/projects.html">← PROJECTS</a><a class="case-top-contact" href="/contact.html">LET'S TALK ↗</a></header>
+<main id="main" tabindex="-1" class="inner-shell case-page">
+  <div class="case-masthead">
+    <p class="overline">03 / CLIENT PLATFORM &amp; CLOUD</p><p class="case-index">ENGINEERING CASE STUDY / 2026</p>
+    <h1>Roxzy Bakery &amp; Catering</h1>
+    <p class="case-deck">A responsive catering website with data-backed enquiries, managed media and protected staff interactions.</p>
+    <div class="case-tags"><span>Cloudflare Workers</span><span>D1</span><span>R2</span><span>Drizzle</span><span>Validation</span><span>Rate limiting</span></div>
+  </div>
+  <div class="case-lead-grid">
+    <section aria-labelledby="challenge"><p class="overline">THE PROBLEM</p><h2 id="challenge">What needed solving.</h2><p>A customer-facing site has to do more than look appealing. Requests need to be captured, media needs reliable storage and staff-facing functionality needs access controls.</p></section>
+    <section aria-labelledby="role"><p class="overline">MY CONTRIBUTION</p><h2 id="role">What I worked on.</h2><ul class="case-bullets"><li>Built customer-facing experiences and structured enquiry workflows.</li><li>Worked with Cloudflare Worker deployment, D1 database migrations and R2 media storage.</li><li>Implemented protected administration concepts, request validation and rate-limiting measures for sensitive endpoints.</li></ul></section>
+  </div>
+  <section class="case-architecture" aria-labelledby="architecture">
+    <p class="overline">SYSTEM DESIGN</p><h2 id="architecture">How the system fits together.</h2>
+    <div class="case-flow" role="img" aria-label="Visitor to Cloudflare Worker to D1 / submissions to R2 / media"><div class="case-flow__step"><span>01</span><strong>Visitor</strong></div><div class="case-flow__step"><span>02</span><strong>Cloudflare Worker</strong></div><div class="case-flow__step"><span>03</span><strong>D1 / submissions</strong></div><div class="case-flow__step"><span>04</span><strong>R2 / media</strong></div></div>
+    <p class="case-flow-caption">Architecture illustration — simplified explanation, not a production infrastructure screenshot.</p>
+    <p>The Worker serves the site and handles server-side functionality. Durable submission records use D1; media is stored separately in R2. Staff actions and submission endpoints are protected with authentication, validation and rate limiting.</p>
+  </section>
+  <section class="case-decisions" aria-labelledby="decisions"><p class="overline">ENGINEERING JUDGMENT</p><h2 id="decisions">Decisions and trade-offs.</h2><div class="case-decision-grid"><article><span class="case-decision-num">01</span><h3>Separate data and media</h3><p>Keep transactional records in a relational database and uploaded images in object storage.</p></article><article><span class="case-decision-num">02</span><h3>Protect mutation endpoints</h3><p>Validate inputs and restrict staff-only functionality instead of relying on hidden controls.</p></article><article><span class="case-decision-num">03</span><h3>Deliver a usable experience</h3><p>Support small screens, clear customer journeys and operational features such as enquiry and tracking flows.</p></article></div></section>
+  <section aria-labelledby="case-evidence"><p class="overline">EVIDENCE AND BOUNDARIES</p><h2 id="case-evidence">What you can verify here.</h2><div class="case-evidence-note"><span class="case-evidence-icon" aria-hidden="true">↗</span><div><strong>Delivery evidence</strong><p>Cloudflare Worker deployment, D1 migrations and R2 storage were part of the engineering work. Private client content and account access are not disclosed.</p></div></div><p class="case-boundary">This portfolio does not publish customer records, private administration screens or financial impact claims. Deployment configuration is not evidence of long-term usage metrics.</p></section>
+  <section class="case-outcome" aria-labelledby="outcome"><p class="overline">OUTCOME</p><h2 id="outcome">What the work delivered.</h2><p>A deployed edge-based website foundation with structured content and operational flows. Public business outcomes are not quantified without client-verified data.</p></section>
+  <section class="case-next" aria-labelledby="case-next"><p class="overline">NEXT</p><h2 id="case-next">Interested in the technical decisions?</h2><p>I can discuss my implementation approach, constraints and lessons learned in an engineering interview, while respecting private project information.</p><nav class="case-nav" aria-label="Case study navigation"><a href="/projects.html">← All projects</a><a href="/assets/Sukkah_Emmanuel_CV_2026.pdf" download>Download CV ↓</a><a href="/contact.html">Discuss a role ↗</a></nav></section>
+</main>
+<footer class="footer inner-shell"><span>© <span data-year>2026</span> SUKKAH EMMANUEL / SOFTWARE ENGINEER</span><div class="footer__links"><a href="/projects.html">ALL PROJECTS</a><a href="https://github.com/LKofi" target="_blank" rel="noopener noreferrer">GITHUB ↗</a><a href="mailto:sukahemmanuelkofi@gmail.com">EMAIL ↗</a></div></footer>
+<script src="/assets/editorial.js?v=20261016proof1" defer></script>
+</body></html>

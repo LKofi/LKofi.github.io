@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#202329">
+<meta name="color-scheme" content="dark">
+<meta name="author" content="Sukkah Emmanuel Kofi Ariel">
+<meta name="description" content="An internal operating platform connecting relationships, proposals, project delivery, billing and support.">
+<link rel="canonical" href="https://lkofi.github.io/case-studies/mernorahflow.html">
+<meta property="og:type" content="article"><meta property="og:site_name" content="SEAK — Software Engineering">
+<meta property="og:title" content="MERNORAHFLOW — Engineering Case Study | Sukkah Emmanuel">
+<meta property="og:description" content="An internal operating platform connecting relationships, proposals, project delivery, billing and support.">
+<meta property="og:url" content="https://lkofi.github.io/case-studies/mernorahflow.html">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/assets/mark.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/editorial.css?v=20261016proof1">
+<link rel="stylesheet" href="/assets/credibility.css?v=20261016proof1">
+<title>MERNORAHFLOW — Engineering Case Study | Sukkah Emmanuel</title>
+</head>
+<body class="editorial case-study-page">
+<a class="skip" href="#main">Skip to case study</a><div class="site-bg-noise" aria-hidden="true"></div>
+<header class="case-topbar inner-shell"><a class="brand" href="/" aria-label="Sukkah Emmanuel portfolio homepage">SEAK<span>.</span></a><a class="case-back" href="/projects.html">← PROJECTS</a><a class="case-top-contact" href="/contact.html">LET'S TALK ↗</a></header>
+<main id="main" tabindex="-1" class="inner-shell case-page">
+  <div class="case-masthead">
+    <p class="overline">01 / PLATFORM ENGINEERING</p><p class="case-index">ENGINEERING CASE STUDY / 2026</p>
+    <h1>MERNORAHFLOW</h1>
+    <p class="case-deck">An internal operating platform connecting relationships, proposals, project delivery, billing and support.</p>
+    <div class="case-tags"><span>TypeScript</span><span>Fastify</span><span>Prisma</span><span>PostgreSQL</span><span>Cloudflare Workers</span></div>
+  </div>
+  <div class="case-lead-grid">
+    <section aria-labelledby="challenge"><p class="overline">THE PROBLEM</p><h2 id="challenge">What needed solving.</h2><p>When operational data is spread across disconnected tools, following an enquiry through delivery and support becomes difficult. MERNORAHFLOW was designed around one linked business lifecycle while keeping workspaces separate.</p></section>
+    <section aria-labelledby="role"><p class="overline">MY CONTRIBUTION</p><h2 id="role">What I worked on.</h2><ul class="case-bullets"><li>Implemented and refined API workflows and PostgreSQL/Prisma data models supporting operational records.</li><li>Worked on workspace-aware access boundaries, input validation and reliable transitions between connected records.</li><li>Investigated application and deployment defects; configured a Cloudflare Worker API connected to hosted PostgreSQL.</li></ul></section>
+  </div>
+  <section class="case-architecture" aria-labelledby="architecture">
+    <p class="overline">SYSTEM DESIGN</p><h2 id="architecture">How the system fits together.</h2>
+    <div class="case-flow" role="img" aria-label="Enquiry to Relationship to Opportunity to Proposal to Agreement to Project to Invoice to Payment to Support"><div class="case-flow__step"><span>01</span><strong>Enquiry</strong></div><div class="case-flow__step"><span>02</span><strong>Relationship</strong></div><div class="case-flow__step"><span>03</span><strong>Opportunity</strong></div><div class="case-flow__step"><span>04</span><strong>Proposal</strong></div><div class="case-flow__step"><span>05</span><strong>Agreement</strong></div><div class="case-flow__step"><span>06</span><strong>Project</strong></div><div class="case-flow__step"><span>07</span><strong>Invoice</strong></div><div class="case-flow__step"><span>08</span><strong>Payment</strong></div><div class="case-flow__step"><span>09</span><strong>Support</strong></div></div>
+    <p class="case-flow-caption">Architecture illustration — simplified explanation, not a production infrastructure screenshot.</p>
+    <p>The web application communicates with an API that applies validation and authorization before updating workspace-scoped PostgreSQL records. Related entities remain connected across the business lifecycle. The operational data stays in MERNORAHFLOW; adjacent intelligence systems do not replace it as the source of truth.</p>
+  </section>
+  <section class="case-decisions" aria-labelledby="decisions"><p class="overline">ENGINEERING JUDGMENT</p><h2 id="decisions">Decisions and trade-offs.</h2><div class="case-decision-grid"><article><span class="case-decision-num">01</span><h3>Workspace isolation</h3><p>Records must be scoped to the correct workspace at the API/data-access boundary, not only filtered in the browser.</p></article><article><span class="case-decision-num">02</span><h3>Lifecycle consistency</h3><p>Represent relationships, projects and billing as linked records rather than unrelated form submissions.</p></article><article><span class="case-decision-num">03</span><h3>Cloud integration</h3><p>Deploy the API at the edge while using a managed relational database; diagnose connection and configuration faults explicitly.</p></article></div></section>
+  <section aria-labelledby="case-evidence"><p class="overline">EVIDENCE AND BOUNDARIES</p><h2 id="case-evidence">What you can verify here.</h2><figure class="case-proof"><img src="/assets/v3-flow-demo.webp" width="1193" height="1050" alt="MERNORAHFLOW local Today workspace demonstration with illustrative records" loading="lazy" decoding="async"><figcaption>Actual local interface demonstration. Records are illustrative, not customer production data.</figcaption></figure><p class="case-boundary">The screenshot documents a local interface demonstration, not measured uptime, production traffic or an independently verified performance benchmark. Private business data and source code are not published here.</p></section>
+  <section class="case-outcome" aria-labelledby="outcome"><p class="overline">OUTCOME</p><h2 id="outcome">What the work delivered.</h2><p>A working foundation for connected relationship, project, commercial and support workflows, with cloud deployment work and ongoing engineering refinement. No unsupported throughput or ROI figures are claimed.</p></section>
+  <section class="case-next" aria-labelledby="case-next"><p class="overline">NEXT</p><h2 id="case-next">Interested in the technical decisions?</h2><p>I can discuss my implementation approach, constraints and lessons learned in an engineering interview, while respecting private project information.</p><nav class="case-nav" aria-label="Case study navigation"><a href="/projects.html">← All projects</a><a href="/assets/Sukkah_Emmanuel_CV_2026.pdf" download>Download CV ↓</a><a href="/contact.html">Discuss a role ↗</a></nav></section>
+</main>
+<footer class="footer inner-shell"><span>© <span data-year>2026</span> SUKKAH EMMANUEL / SOFTWARE ENGINEER</span><div class="footer__links"><a href="/projects.html">ALL PROJECTS</a><a href="https://github.com/LKofi" target="_blank" rel="noopener noreferrer">GITHUB ↗</a><a href="mailto:sukahemmanuelkofi@gmail.com">EMAIL ↗</a></div></footer>
+<script src="/assets/editorial.js?v=20261016proof1" defer></script>
+</body></html>
