@@ -1,0 +1,40 @@
+name: Lighthouse performance and quality
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  lighthouse:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install Lighthouse
+        run: npm install --no-save --package-lock=false --ignore-scripts lighthouse@12.8.2
+      - name: Start local static site
+        run: |
+          python3 -m http.server 4173 --bind 127.0.0.1 > /tmp/seak-lighthouse-site.log 2>&1 &
+          sleep 2
+          mkdir -p test-output
+      - name: Audit homepage
+        run: npx lighthouse http://127.0.0.1:4173/ --output=json --output-path=test-output/lighthouse-home.json --only-categories=performance,accessibility,best-practices,seo --chrome-flags="--headless --no-sandbox --disable-dev-shm-usage" --max-wait-for-load=20000 --quiet
+      - name: Audit projects
+        run: npx lighthouse http://127.0.0.1:4173/projects.html --output=json --output-path=test-output/lighthouse-projects.json --only-categories=performance,accessibility,best-practices,seo --chrome-flags="--headless --no-sandbox --disable-dev-shm-usage" --max-wait-for-load=20000 --quiet
+      - name: Audit contact
+        run: npx lighthouse http://127.0.0.1:4173/contact.html --output=json --output-path=test-output/lighthouse-contact.json --only-categories=performance,accessibility,best-practices,seo --chrome-flags="--headless --no-sandbox --disable-dev-shm-usage" --max-wait-for-load=20000 --quiet
+      - name: Report audit metrics
+        run: node scripts/lighthouse-report.mjs
+      - name: Attach reproducible Lighthouse JSON
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: lighthouse-json
+          path: test-output/lighthouse-*.json
+          retention-days: 14

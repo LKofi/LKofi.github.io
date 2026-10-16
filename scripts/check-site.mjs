@@ -3,9 +3,9 @@ import path from 'node:path';
 import {spawnSync} from 'node:child_process';
 import {createHash} from 'node:crypto';
 const pages=['index.html','projects.html','about.html','experience.html','contact.html','resume.html','capabilities.html','engineering-roadmap.html','case-studies/mernorahflow.html','case-studies/securegate.html','case-studies/roxzy.html'];
-const assets=['assets/editorial.css','assets/credibility.css','assets/capabilities.css','assets/trust.css','assets/editorial.js','assets/seak-portrait-clean.webp','assets/v3-flow-demo.webp','assets/Sukkah_Emmanuel_CV_2026.pdf','assets/mark.svg'];
+const assets=['assets/editorial.css','assets/credibility.css','assets/capabilities.css','assets/trust.css','assets/evidence.css','assets/editorial.js','assets/seak-portrait-clean.webp','assets/v3-flow-demo.webp','assets/Sukkah_Emmanuel_CV_2026.pdf','assets/mark.svg'];
 for(const file of [...pages,...assets])if(!fs.existsSync(file))throw Error('Required file missing: '+file);
-for(const file of ['assets/editorial.js']){const p=spawnSync(process.execPath,['--check',file],{encoding:'utf8'});if(p.status!==0)throw Error('JavaScript syntax error '+file+'\n'+p.stderr);}
+for(const file of ['assets/editorial.js','engineering-lab/access.mjs','engineering-lab/journal.mjs','engineering-lab/webhook.mjs','engineering-lab/lab.test.mjs','scripts/lighthouse-report.mjs']){const p=spawnSync(process.execPath,['--check',file],{encoding:'utf8'});if(p.status!==0)throw Error('JavaScript syntax error '+file+'\n'+p.stderr);}
 for(const file of pages){
  const html=fs.readFileSync(file,'utf8');
  if(!/<main\b[^>]*id=["']main["']/.test(html))throw Error('Missing main landmark: '+file);
@@ -80,8 +80,13 @@ const exp=fs.readFileSync('experience.html','utf8');
 if(!exp.includes('id="role-fit"')||!exp.includes('2026 / NETWORK INFRASTRUCTURE'))throw Error('Recruiter evidence or grounded network dates missing');
 if(!projects.includes('id="engineering-review"')||!projects.includes('class="review-matrix"'))throw Error('Engineering evidence matrix missing');
 for(const id of ['mernorahflow','securegate','roxzy'])if(!fs.readFileSync('case-studies/'+id+'.html','utf8').includes('id="technical-review"'))throw Error('Technical validation context missing: '+id);
+const lab=spawnSync(process.execPath,['--test','engineering-lab/lab.test.mjs'],{encoding:'utf8'});
+if(lab.status!==0)throw Error('Public engineering lab tests failed: '+lab.stdout+' '+lab.stderr);
+if(!home.includes('class="open-source-proof"')||!home.includes('engineering-lab'))throw Error('Reproducible engineering proof missing on homepage');
+if(!projects.includes('Public engineering reference lab')||!projects.includes('engineering-lab'))throw Error('Engineering lab absent from evidence matrix');
 const contact=fs.readFileSync('contact.html','utf8');
 if(!contact.includes('id="project-brief"')||!contact.includes('client-process__steps'))throw Error('Client scoping and delivery process missing');
+if(!contact.includes('class="brief-template"')||!contact.includes('Compose a project brief in email'))throw Error('Client email brief and privacy option missing');
 if(!contact.includes('action="https://formsubmit.co/ajax/')||!contact.includes('mailto:sukahemmanuelkofi@gmail.com'))throw Error('Contact form or fallback missing');
 const cv=fs.readFileSync('assets/Sukkah_Emmanuel_CV_2026.pdf');
 const hash=createHash('sha1').update(Buffer.from('blob '+cv.length+'\0')).update(cv).digest('hex');
@@ -92,4 +97,4 @@ for(const expected of ['function closeMenu(restoreFocus=true)','focusables=[togg
 }
 const css=fs.readFileSync('assets/editorial.css','utf8');
 for(const key of ['--orange:#ff6d26','grid-template','prefers-reduced-motion','max-width:650px'])if(!css.includes(key))throw Error('Design or accessibility regression: '+key);
-console.log('PASS — eleven pages, 12 projects, 3 audience pathways, case-study engineering depth, evidence boundaries, seven planned roadmap builds, LinkedIn links, navigation, assets and unchanged approved CV.');
+console.log('PASS — source navigation, client email brief, public engineering reference tests, documented evidence, eleven pages and original approved CV unchanged.');
