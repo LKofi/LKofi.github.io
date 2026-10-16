@@ -56,6 +56,13 @@ for(const id of ['mernorahflow','securegate','roxzy']){
  const page=await browser.newPage({viewport:{width:390,height:844}});
  const r=await page.goto(base+'/projects.html',{waitUntil:'domcontentloaded'});
  checks(r?.status()===200,'projects page missing');
+ checks(await page.locator('.projects > article.project').count()===12,'projects catalog should contain twelve cards');
+ checks((await page.locator('#result-count').textContent())?.includes('12 projects'),'initial project count not updated');
+ for(const id of ['mernorah-intelligence','mernorah-experience','seak-portfolio']){
+  checks(await page.locator('#'+id).count()===1,'new engineering project missing: '+id);
+ }
+ const arrows=await page.locator('a,button').evaluateAll(nodes=>nodes.filter(n=>/[↗↓←➤⟶]/.test(n.textContent||'')).length);
+ checks(arrows===0,'decorative arrows remain in interactive controls');
  const filter=page.locator('[data-filter="security"]');await filter.click();
  checks(await page.locator('[data-category]:visible').count()>=1,'security filter leaves no projects');
  await page.goto(base+'/contact.html',{waitUntil:'domcontentloaded'});
@@ -71,4 +78,4 @@ for(const id of ['mernorahflow','securegate','roxzy']){
 await browser.close();
 console.log('BROWSER AUDIT:',JSON.stringify(report,null,2));
 if(errors.length){console.error('BROWSER AUDIT FAILURES:\n'+errors.join('\n'));process.exit(1)}
-console.log('PASS — browser smoke suite across desktop, mobile, small mobile, case studies, filtering and form validation.');
+console.log('PASS — browser smoke suite across desktop, mobile, small mobile, twelve projects, streamlined controls, case studies, filtering and form validation.');
