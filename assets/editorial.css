@@ -189,3 +189,8 @@ a{color:inherit;text-decoration:none}button,input,textarea,select{font:inherit}b
 .note,.minor{color:#c9cbd3}
 a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible,summary:focus-visible{outline:3px solid #ffad74;outline-offset:4px}
 @media(max-width:650px){.stage__info p{font-size:12px;line-height:1.48}.stage__info h2{font-size:13px}.stage-under{font-size:11px}.stage__count{font-size:11px}}
+
+/* Footer links wrap without causing horizontal mobile overflow. */
+.footer__links{display:flex;flex-wrap:wrap;column-gap:clamp(12px,2vw,24px);row-gap:14px;max-width:100%;min-width:0}
+.footer__links a{white-space:nowrap;min-height:32px;display:inline-flex;align-items:center}
+@media(max-width:650px){.footer{align-items:flex-start}.footer__links{width:100%;justify-content:flex-start}.footer>span{max-width:100%}}
