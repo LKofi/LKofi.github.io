@@ -2,15 +2,16 @@ import fs from 'node:fs';
 import path from 'node:path';
 import {spawnSync} from 'node:child_process';
 import {createHash} from 'node:crypto';
-const pages=['index.html','projects.html','about.html','experience.html','contact.html','resume.html'];
-const assets=['assets/editorial.css','assets/editorial.js','assets/seak-portrait-clean.webp','assets/Sukkah_Emmanuel_CV_2026.pdf','assets/mark.svg'];
+const pages=['index.html','projects.html','about.html','experience.html','contact.html','resume.html','case-studies/mernorahflow.html','case-studies/securegate.html','case-studies/roxzy.html'];
+const assets=['assets/editorial.css','assets/credibility.css','assets/editorial.js','assets/seak-portrait-clean.webp','assets/v3-flow-demo.webp','assets/Sukkah_Emmanuel_CV_2026.pdf','assets/mark.svg'];
 for(const file of [...pages,...assets])if(!fs.existsSync(file))throw Error('Required file missing: '+file);
 for(const file of ['assets/editorial.js']){const p=spawnSync(process.execPath,['--check',file],{encoding:'utf8'});if(p.status!==0)throw Error('JavaScript syntax error '+file+'\n'+p.stderr);}
 for(const file of pages){
  const html=fs.readFileSync(file,'utf8');
  if(!/<main\b[^>]*id=["']main["']/.test(html))throw Error('Missing main landmark: '+file);
  if(!html.includes('<title>')||!html.includes('name="description"')||!html.includes('rel="canonical"'))throw Error('Missing SEO data: '+file);
- if(!html.includes('id="menu-button"')||!html.includes('id="site-menu"'))throw Error('Navigation missing: '+file);
+ if(!file.startsWith('case-studies/')&&(!html.includes('id="menu-button"')||!html.includes('id="site-menu"')))throw Error('Navigation missing: '+file);
+ if(file.startsWith('case-studies/')&&!html.includes('class="case-nav"'))throw Error('Case navigation missing: '+file);
  if(!html.includes('href="/projects.html"')||!html.includes('href="/contact.html"'))throw Error('Recruiter navigation missing: '+file);
  if((html.match(/<h1\b/gi)||[]).length!==1)throw Error('Expected exactly one H1: '+file);
  if(/\s+on(?:click|load|error|mouseover|focus)\s*=/i.test(html))throw Error('Unsafe inline event attribute: '+file);
@@ -21,8 +22,8 @@ for(const file of pages){
  for(const m of html.matchAll(/(?:href|src|action)=["']([^"']+)["']/g)){
   const url=m[1];if(!url||/^(https?:|mailto:|tel:|data:)/.test(url))continue;
   if(/^javascript:/i.test(url))throw Error('Unsafe URI: '+file);
-  const [loc,fragment]=url.split('#');const source=loc||file;
-  const target=source.startsWith('/')?path.join(process.cwd(),source.slice(1)):path.join(process.cwd(),path.dirname(file),source);
+  const [loc,fragment]=url.split('#');
+  const target=!loc?path.join(process.cwd(),file):loc.startsWith('/')?path.join(process.cwd(),loc.slice(1)):path.join(process.cwd(),path.dirname(file),loc);
   const pathWithoutQuery=target.split('?')[0];
   if(!fs.existsSync(pathWithoutQuery))throw Error('Broken local asset/link: '+file+' => '+url);
   if(fragment){const other=fs.readFileSync(pathWithoutQuery,'utf8');if(!other.includes('id="'+decodeURIComponent(fragment)+'"'))throw Error('Broken fragment: '+file+' => '+url)}
@@ -31,9 +32,9 @@ for(const file of pages){
 for(const page of pages){
  const html=fs.readFileSync(page,'utf8');
  if(!html.includes('tabindex="-1"'))throw Error('Skip target cannot receive focus: '+page);
- if(!html.includes('/assets/editorial.css?v=20261016quality1'))throw Error('CSS version was not refreshed: '+page);
- if(!html.includes('/assets/editorial.js?v=20261016quality1'))throw Error('JS version was not refreshed: '+page);
- if(page!=='resume.html'){
+ if(!html.includes('/assets/editorial.css?v=20261016quality1')&&!html.includes('/assets/editorial.css?v=20261016proof1'))throw Error('CSS version was not refreshed: '+page);
+ if(!html.includes('/assets/editorial.js?v=20261016quality1')&&!html.includes('/assets/editorial.js?v=20261016proof1'))throw Error('JS version was not refreshed: '+page);
+ if(!page.startsWith('case-studies/')&&page!=='resume.html'){
   const expected=page==='index.html'?'/':'/'+page;
   if(!html.includes('aria-current="page" href="'+expected+'"'))throw Error('Current page not identified: '+page);
  }
@@ -41,9 +42,18 @@ for(const page of pages){
 const home=fs.readFileSync('index.html','utf8');
 for(const must of ['id="slide-heading"','id="next-slide"','id="progress-fill"','class="stage__ring"','class="stage__portrait"','/assets/seak-portrait-clean.webp','/assets/editorial.css','/assets/editorial.js'])if(!home.includes(must))throw Error('Reference design element missing: '+must);
 if(!home.includes('DOWNLOAD CV ↓')||!home.includes('CONTACT ↗'))throw Error('Homepage recruiter quicklinks missing');
+if(!home.includes('class="hero-viewport"')||!home.includes('id="engineering-proof"'))throw Error('Hero viewport or engineering evidence missing');
+if(!home.includes('/assets/credibility.css?v=20261016proof1'))throw Error('Proof stylesheet missing on home');
 const projects=fs.readFileSync('projects.html','utf8');
 for(const id of ['mernorahflow','securegate','roxzy','farmart','retailcore','hopehills','netpulse','innovartus','mernorah-web'])if(!projects.includes('id="'+id+'"')||!projects.includes('id="'+id+'-case"'))throw Error('Project omitted: '+id);
 if(!projects.includes('src="/assets/v3-flow-demo.webp"'))throw Error('Local demonstration evidence missing');
+for(const id of ['mernorahflow','securegate','roxzy']){
+ const link='/case-studies/'+id+'.html';
+ const page=fs.readFileSync('case-studies/'+id+'.html','utf8');
+ if(!projects.includes(link)||!home.includes(link))throw Error('Case study not discoverable from home and projects: '+id);
+ for(const section of ['id="challenge"','id="role"','id="architecture"','id="decisions"','id="case-evidence"','id="outcome"'])if(!page.includes(section))throw Error('Technical case study incomplete: '+id+'/'+section);
+ if(!page.includes('Architecture illustration'))throw Error('Diagram must be labeled: '+id);
+}
 const contact=fs.readFileSync('contact.html','utf8');
 if(!contact.includes('action="https://formsubmit.co/ajax/')||!contact.includes('mailto:sukahemmanuelkofi@gmail.com'))throw Error('Contact form or fallback missing');
 const cv=fs.readFileSync('assets/Sukkah_Emmanuel_CV_2026.pdf');
@@ -55,4 +65,4 @@ for(const expected of ['function closeMenu(restoreFocus=true)','focusables=[togg
 }
 const css=fs.readFileSync('assets/editorial.css','utf8');
 for(const key of ['--orange:#ff6d26','grid-template','prefers-reduced-motion','max-width:650px'])if(!css.includes(key))throw Error('Design or accessibility regression: '+key);
-console.log('PASS — six pages, nine project case studies, navigation, assets, JS syntax, accessibility basics, and unchanged approved CV.');
+console.log('PASS — nine pages, nine projects, three flagship technical case studies, clear evidence labeling, navigation, links, assets, JS syntax, accessibility basics, and approved CV unchanged.');
