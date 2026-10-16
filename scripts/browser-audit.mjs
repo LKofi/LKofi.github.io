@@ -27,7 +27,8 @@ for(const viewport of [{width:1440,height:900,name:'desktop'},{width:390,height:
  await toggle.click();
  checks(await page.locator('#site-menu').isVisible(),viewport.name+': opening menu failed');
  const links=await page.locator('#site-menu a.nav-panel__link').count();
- checks(links===6,viewport.name+': menu has '+links+' primary links instead of six');
+ checks(links===7,viewport.name+': menu has '+links+' primary links instead of seven');
+ checks(await page.locator('#site-menu a[href="/capabilities.html"]').count()===1,viewport.name+': capabilities navigation missing');
  await page.keyboard.press('Escape');
  checks(await page.locator('#site-menu').isHidden(),viewport.name+': escape did not close menu');
  checks(await toggle.getAttribute('aria-expanded')==='false',viewport.name+': aria-expanded remains true');
@@ -37,6 +38,29 @@ for(const viewport of [{width:1440,height:900,name:'desktop'},{width:390,height:
  await page.screenshot({path:'test-output/'+viewport.name+'-home.png',fullPage:true});
  report.push({viewport:viewport.name,...sizes});
  await page.close();
+}
+for(const viewport of [{width:1440,height:900,name:'desktop'},{width:390,height:844,name:'mobile'},{width:360,height:740,name:'small-mobile'}]){
+ for(const target of [{path:'/capabilities.html',key:'capabilities',selector:'#industry-experience'},{path:'/engineering-roadmap.html',key:'roadmap',selector:'.roadmap-panel'}]){
+  const page=await browser.newPage({viewport:{width:viewport.width,height:viewport.height}});
+  page.on('pageerror',error=>errors.push(viewport.name+' '+target.key+' JavaScript: '+error.message));
+  const response=await page.goto(base+target.path,{waitUntil:'domcontentloaded'});
+  checks(response?.status()===200,viewport.name+' '+target.key+' page returned non-200');
+  checks(await page.locator(target.selector).count()>0,viewport.name+' '+target.key+' content missing');
+  const dims=await page.evaluate(()=>({width:document.documentElement.clientWidth,scrollWidth:document.documentElement.scrollWidth}));
+  checks(dims.scrollWidth<=dims.width+2,viewport.name+' '+target.key+' horizontal overflow: '+JSON.stringify(dims));
+  checks(await page.locator('#site-menu a.nav-panel__link').count()===7,viewport.name+' '+target.key+' seven-item menu missing');
+  if(target.key==='capabilities'){
+   checks(await page.locator('.cap-service').count()===6,viewport.name+' capability category count incorrect');
+   checks(await page.locator('.cap-sector').count()===7,viewport.name+' prior sector evidence count incorrect');
+   checks(await page.locator('.cap-target').count()===8,viewport.name+' potential industries count incorrect');
+  }else{
+   checks(await page.locator('.roadmap-panel').count()===4,viewport.name+' roadmap technical detail count incorrect');
+   checks(await page.locator('.roadmap-small').count()===3,viewport.name+' supplemental roadmap projects absent');
+  }
+  await page.screenshot({path:'test-output/'+viewport.name+'-'+target.key+'.png',fullPage:viewport.name!=='desktop'});
+  report.push({viewport:viewport.name,page:target.key,...dims});
+  await page.close();
+ }
 }
 for(const id of ['mernorahflow','securegate','roxzy']){
  const page=await browser.newPage({viewport:{width:1280,height:900}});
@@ -78,4 +102,4 @@ for(const id of ['mernorahflow','securegate','roxzy']){
 await browser.close();
 console.log('BROWSER AUDIT:',JSON.stringify(report,null,2));
 if(errors.length){console.error('BROWSER AUDIT FAILURES:\n'+errors.join('\n'));process.exit(1)}
-console.log('PASS — browser smoke suite across desktop, mobile, small mobile, twelve projects, streamlined controls, case studies, filtering and form validation.');
+console.log('PASS — browser smoke suite across desktop, mobile, small mobile, eleven pages, industries, capability groups, roadmap, twelve projects, navigation, case studies, filtering and form validation.');
