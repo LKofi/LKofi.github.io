@@ -7,6 +7,8 @@ A multi-page, accessible personal portfolio built for job applications and engin
 ## Pages
 - `index.html` — cinematic hero and featured engineering work
 - `projects.html` — twelve engineering projects, filtering, and clear prototype-versus-delivery distinctions
+- `capabilities.html` — real engineering capabilities, related industry experience and sectors suitable for future solutions
+- `engineering-roadmap.html` — seven clearly labeled planned GitHub projects with architecture, security, tests and intended demonstrations
 - `about.html` — personal engineering approach and photography
 - `experience.html` — experience and expanded technical toolkit
 - `contact.html` — contact form, direct mail and GitHub
@@ -26,3 +28,6 @@ Source screenshots are not fabricated: project art is clearly marked as conceptu
 
 ## Additional engineering work
 The catalog also includes MERNORAH INTELLIGENCE (an early enterprise AI authentication/MFA prototype), MERNORAH WEB EXPERIENCE (immersive frontend development work), and this SEAK PORTFOLIO (public source). Development-stage entries are identified as such and do not claim completed production deployments.
+
+## Evidence boundaries
+Documented experience and work-in-progress are distinguished from proposed systems. The capabilities page labels industries with related work separately from sectors that are prospective opportunities; the roadmap describes future engineering builds, **not** completed projects or published source. Project details remain bounded by the approved CV and accessible code evidence.
