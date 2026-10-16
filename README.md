@@ -21,6 +21,14 @@ Static HTML/CSS/JavaScript with accessible navigation, semantic controls, respon
 ## Email activation
 Contact messages are routed through FormSubmit to `sukahemmanuelkofi@gmail.com`. To activate, submit one test message, open the FormSubmit activation email in that mailbox, approve forwarding, then test again. Form acceptance alone is **not proof** of mailbox delivery. Direct mail links remain available.
 
+## Hiring pathways and engineering evidence
+- Homepage provides separate first-click routes for international recruiters, engineering managers and prospective clients.
+- Experience includes a recruiter summary and approved CV link; Projects includes an honest evidence index distinguishing public source, private work, prototypes and plans.
+- Contact includes a suggested scoped project engagement process, without fabricated promises or performance numbers.
+- Three case studies include technical validation and evidence-boundary notes, and the MERNORAHFLOW write-up explicitly distinguishes separate documented architecture stages.
+- LinkedIn profile link is the address supplied by the site owner; its logged-in profile content has not been verified here.
+- GitHub Actions browser smoke tests include axe-core WCAG rule checks. Critical violations fail the workflow; other findings are reported for review.
+
 ## Deployment
 GitHub Pages deploys on pushes to `main`. `.github/workflows/pages.yml` runs source integrity checks. `.github/workflows/browser-audit.yml` runs Chromium smoke tests for desktop and mobile. See `scripts/check-site.mjs` and `scripts/browser-audit.mjs`.
 
